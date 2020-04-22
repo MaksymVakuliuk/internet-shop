@@ -1,12 +1,13 @@
-package mate.academy.internetshop.dao.impl;
+package com.internet.shop.dao.impl;
 
-import mate.academy.internetshop.dao.ItemDao;
-import mate.academy.internetshop.lib.DaoImpl;
-import mate.academy.internetshop.model.Product;
+import com.internet.shop.lib.Dao;
+import com.internet.shop.model.Product;
+import com.internet.shop.dao.ItemDao;
+
 import java.util.List;
 import java.util.Optional;
 
-@DaoImpl
+@Dao
 public class ItemDaoImpl implements ItemDao {
 
     @Override

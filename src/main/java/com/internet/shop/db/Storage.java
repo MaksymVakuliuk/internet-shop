@@ -1,7 +1,7 @@
-package mate.academy.internetshop.db;
+package com.internet.shop.db;
 
-import mate.academy.internetshop.model.Bucket;
-import mate.academy.internetshop.model.Product;
+import com.internet.shop.model.Bucket;
+import com.internet.shop.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;

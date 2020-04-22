@@ -1,6 +1,6 @@
-package mate.academy.internetshop.dao;
+package com.internet.shop.dao;
 
-import mate.academy.internetshop.model.Bucket;
+import com.internet.shop.model.Bucket;
 
 public interface BucketDao {
     Bucket create(Bucket bucket);

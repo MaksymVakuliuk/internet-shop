@@ -1,12 +1,12 @@
-package mate.academy.internetshop.service.impl;
+package com.internet.shop.service.impl;
 
-import mate.academy.internetshop.dao.BucketDao;
-import mate.academy.internetshop.dao.ItemDao;
-import mate.academy.internetshop.lib.Inject;
-import mate.academy.internetshop.lib.Service;
-import mate.academy.internetshop.model.Bucket;
-import mate.academy.internetshop.model.Product;
-import mate.academy.internetshop.service.BucketService;
+import com.internet.shop.model.Bucket;
+import com.internet.shop.model.Product;
+import com.internet.shop.dao.BucketDao;
+import com.internet.shop.dao.ItemDao;
+import com.internet.shop.lib.Inject;
+import com.internet.shop.lib.Service;
+import com.internet.shop.service.BucketService;
 
 @Service
 public class BucketServiceImpl implements BucketService {

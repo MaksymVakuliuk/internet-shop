@@ -1,10 +1,10 @@
-package mate.academy.internetshop.service.impl;
+package com.internet.shop.service.impl;
 
-import mate.academy.internetshop.dao.ItemDao;
-import mate.academy.internetshop.lib.Inject;
-import mate.academy.internetshop.lib.Service;
-import mate.academy.internetshop.model.Product;
-import mate.academy.internetshop.service.ItemService;
+import com.internet.shop.model.Product;
+import com.internet.shop.dao.ItemDao;
+import com.internet.shop.lib.Inject;
+import com.internet.shop.lib.Service;
+import com.internet.shop.service.ItemService;
 import java.util.List;
 
 @Service

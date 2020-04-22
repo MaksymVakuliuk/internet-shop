@@ -1,13 +1,13 @@
-package mate.academy.internetshop.dao.impl;
+package com.internet.shop.dao.impl;
 
-import mate.academy.internetshop.dao.BucketDao;
-import mate.academy.internetshop.db.Storage;
-import mate.academy.internetshop.lib.DaoImpl;
-import mate.academy.internetshop.model.Bucket;
+import com.internet.shop.dao.BucketDao;
+import com.internet.shop.db.Storage;
+import com.internet.shop.model.Bucket;
+import com.internet.shop.lib.Dao;
 
 import java.util.NoSuchElementException;
 
-@DaoImpl
+@Dao
 public class BucketDaoImpl implements BucketDao {
     @Override
     public Bucket create(Bucket bucket) {
