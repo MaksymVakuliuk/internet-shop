@@ -1,11 +1,11 @@
-package com.internet.shop.dao;
+package com.internet.shop.service;
 
 import com.internet.shop.model.Product;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ItemDao {
+public interface ProductService {
     Product create(Product product);
 
     Optional<Product> get(Long id);

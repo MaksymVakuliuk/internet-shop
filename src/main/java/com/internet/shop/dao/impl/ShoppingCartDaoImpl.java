@@ -1,22 +1,22 @@
 package com.internet.shop.dao.impl;
 
-import com.internet.shop.dao.BucketDao;
+import com.internet.shop.dao.ShoppingCartDao;
 import com.internet.shop.db.Storage;
-import com.internet.shop.model.Bucket;
+import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.lib.Dao;
 
 import java.util.NoSuchElementException;
 
 @Dao
-public class BucketDaoImpl implements BucketDao {
+public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
-    public Bucket create(Bucket bucket) {
+    public ShoppingCart create(ShoppingCart shoppingCart) {
         return null;
     }
 
     @Override
-    public Bucket get(Long bucketId) {
-        return Storage.buckets
+    public ShoppingCart get(Long bucketId) {
+        return Storage.SHOPPING_CARTS
                 .stream()
                 .filter(b -> b.getId().equals(bucketId))
                 .findFirst()
@@ -25,7 +25,7 @@ public class BucketDaoImpl implements BucketDao {
     }
 
     @Override
-    public Bucket update(Bucket bucket) {
+    public ShoppingCart update(ShoppingCart shoppingCart) {
         return null;
     }
 }

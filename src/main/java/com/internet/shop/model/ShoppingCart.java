@@ -2,25 +2,25 @@ package com.internet.shop.model;
 
 import java.util.List;
 
-public class Order {
+public class ShoppingCart {
     private Long id;
-    private User user;
     private List<Product> products;
+    private Long orderId;
 
-    public Order(User user, List<Product> products) {
-        this.user = user;
+    public ShoppingCart(List<Product> products, Long orderId) {
         this.products = products;
+        this.orderId = orderId;
     }
 
     public Long getId() {
         return id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
     public List<Product> getProducts() {
         return products;
+    }
+
+    public Long getOrderId() {
+        return orderId;
     }
 }
