@@ -1,10 +1,9 @@
 package com.internet.shop.dao.impl;
 
+import com.internet.shop.dao.ProductDao;
 import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Product;
-import com.internet.shop.dao.ProductDao;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -34,7 +33,11 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product update(Product product) {
-        IntStream.range(0, Storage.PRODUCTS.size()).filter(i -> Storage.PRODUCTS.get(i).getId().equals(product.getId())).forEach(i -> Storage.PRODUCTS.set(i,product));
+        IntStream.range(0, Storage.PRODUCTS.size())
+                .filter(i -> Storage.PRODUCTS.get(i)
+                        .getId()
+                        .equals(product.getId()))
+                .forEach(i -> Storage.PRODUCTS.set(i,product));
         return product;
     }
 
