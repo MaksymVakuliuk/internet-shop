@@ -27,4 +27,12 @@ public class Order {
     public List<Product> getProducts() {
         return products;
     }
+
+    @Override
+    public String toString() {
+        return "Order{"
+                + "id=" + id
+                + ", user=" + user
+                + ", products=" + products + '}';
+    }
 }
