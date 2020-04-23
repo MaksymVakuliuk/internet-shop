@@ -14,7 +14,6 @@ public class Product {
         return id;
     }
 
-    //temp
     public void setId(Long id) {
         this.id = id;
     }
