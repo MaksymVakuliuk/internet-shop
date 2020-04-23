@@ -1,18 +1,17 @@
 package com.internet.shop.dao;
 
-import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import java.util.List;
+import java.util.Optional;
 
 public interface ShoppingCartDao {
+    ShoppingCart create(ShoppingCart shoppingCart);
 
-    ShoppingCart addProduct(ShoppingCart shoppingCart, Product product);
+    Optional<ShoppingCart> get(Long id);
 
-    boolean deleteProduct(ShoppingCart shoppingCart, Product product);
+    List<ShoppingCart> getAll();
 
-    void clear(ShoppingCart shoppingCart); //remove all products from the shoppingCart
+    ShoppingCart update(ShoppingCart shoppingCart);
 
-    ShoppingCart getByUserId(Long userId);
-
-    List<Product> getAllProducts(ShoppingCart shoppingCart);
+    boolean delete(Long id);
 }

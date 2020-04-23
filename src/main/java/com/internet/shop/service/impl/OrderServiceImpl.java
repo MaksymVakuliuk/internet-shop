@@ -16,26 +16,26 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(List<Product> products, User user) {
-        return null;
+        return orderDao.completeOrder(products, user);
     }
 
     @Override
     public List<Order> getUserOrders(User user) {
-        return null;
+        return orderDao.getUserOrders(user);
     }
 
     @Override
     public Order get(Long id) {
-        return null;
+        return orderDao.get(id);
     }
 
     @Override
     public List<Order> getAll() {
-        return null;
+        return orderDao.getAll();
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return orderDao.delete(id);
     }
 }

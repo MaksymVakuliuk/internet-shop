@@ -14,26 +14,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
-        return null;
+        return userDao.create(user);
     }
 
     @Override
     public User get(Long id) {
-        return null;
+        return userDao.get(id).get();
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        return userDao.getAll();
     }
 
     @Override
     public User update(User user) {
-        return null;
+        return userDao.update(user);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return userDao.delete(id);
     }
 }

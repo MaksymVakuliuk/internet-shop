@@ -2,8 +2,10 @@ package com.internet.shop;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
+import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.model.User;
 import com.internet.shop.service.ProductService;
+import com.internet.shop.service.ShoppingCartService;
 import com.internet.shop.service.UserService;
 import java.util.List;
 
@@ -13,9 +15,11 @@ public class Application {
     public static void main(String[] args) {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);
         UserService userService = (UserService) injector.getInstance(UserService.class);
+        ShoppingCartService shoppingCartService = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
 
         testProductDao(productService);
         testUserDao(userService);
+
     }
 
     private static void testProductDao(ProductService productService) {
@@ -53,6 +57,26 @@ public class Application {
         List<User> users = userService.getAll();
         for (User user : users) {
             System.out.println(user.toString());
+        }
+    }
+    private static void testShoppingCartDao(ShoppingCartService shoppingCartService, UserService userService, ProductService productService) {
+        List<User> users = userService.getAll();
+        List<Product> products = productService.getAll();
+        ShoppingCart shoppingCart1 = new ShoppingCart(users.get(1), products.));
+        ShoppingCart shoppingCart2 = new ShoppingCart(users.get(2), products.get(1));
+        ShoppingCart shoppingCart3 = new ShoppingCart(userService.get(3), 29.0);
+        shoppingCartService.create(shoppingCart1);
+        shoppingCartService.create(shoppingCart2);
+        shoppingCartService.create(shoppingCart3);
+        shoppingCartService.delete(2L);
+        shoppingCartService.create(new ShoppingCart("PineApple", 45.0));
+        ShoppingCart newShoppingCart = new ShoppingCart("Apple", 12.2);
+        newShoppingCart.setId(1L);
+        shoppingCartService.update(newShoppingCart);
+
+        List<ShoppingCart> shoppingCarts = shoppingCartService.getAll();
+        for (ShoppingCart shoppingCart : shoppingCarts) {
+            System.out.println(shoppingCart.toString());
         }
     }
 
