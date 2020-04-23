@@ -5,7 +5,6 @@ import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Product;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -22,8 +21,7 @@ public class ProductDaoImpl implements ProductDao {
         return Storage.products
                 .stream()
                 .filter(product -> product.getId().equals(id))
-                .findFirst()
-                .or(Optional::empty);
+                .findFirst();
     }
 
     @Override
@@ -43,7 +41,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public boolean delete(Long id) {
-        Storage.products.remove(get(id).orElseThrow(NoSuchElementException::new));
+        Storage.products.removeIf(product -> product.getId().equals(id));
         return true;
     }
 }
