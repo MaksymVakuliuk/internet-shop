@@ -1,11 +1,10 @@
-package mate.academy.internetshop.dao;
+package com.internet.shop.dao;
 
-import mate.academy.internetshop.model.Product;
-
+import com.internet.shop.model.Product;
 import java.util.List;
 import java.util.Optional;
 
-public interface ItemDao {
+public interface ProductDao {
     Product create(Product product);
 
     Optional<Product> get(Long id);
