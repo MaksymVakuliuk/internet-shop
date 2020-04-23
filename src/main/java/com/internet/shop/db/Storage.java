@@ -17,7 +17,7 @@ public class Storage {
     private static Long shoppingCartId = 0L;
     private static Long userId = 0L;
 
-    public static Order addProduct(Order order) {
+    public static Order addOrder(Order order) {
         orderId++;
         order.setId(orderId);
         orders.add(order);
@@ -31,14 +31,14 @@ public class Storage {
         return product;
     }
 
-    public static ShoppingCart addProduct(ShoppingCart shoppingCart) {
+    public static ShoppingCart addShoppingCart(ShoppingCart shoppingCart) {
         shoppingCartId++;
         shoppingCart.setId(shoppingCartId);
         shoppingCarts.add(shoppingCart);
         return shoppingCart;
     }
 
-    public static User addProduct(User user) {
+    public static User addUser(User user) {
         userId++;
         user.setId(userId);
         users.add(user);
