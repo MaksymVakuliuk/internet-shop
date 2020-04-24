@@ -20,7 +20,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order completeOrder(List<Product> products, User user) {
         Order order = orderDao.create(new Order(user, List.copyOf(products)));
-        //Order order = orderDao.completeOrder(List.copyOf(products), user);
         shoppingCartService.clear(shoppingCartService.getByUserId(user.getId()));
         return order;
     }
