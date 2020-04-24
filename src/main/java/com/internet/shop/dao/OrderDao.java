@@ -1,18 +1,20 @@
 package com.internet.shop.dao;
 
 import com.internet.shop.model.Order;
-import com.internet.shop.model.Product;
 import com.internet.shop.model.User;
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderDao {
-    Order completeOrder(List<Product> products, User user);
+    Order create(Order order);
 
     List<Order> getUserOrders(User user);
 
-    Order get(Long id);
+    Optional<Order> get(Long id);
 
     List<Order> getAll();
+
+    Order update(Order order);
 
     boolean delete(Long id);
 }

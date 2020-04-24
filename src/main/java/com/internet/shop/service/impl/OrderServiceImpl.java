@@ -7,16 +7,22 @@ import com.internet.shop.model.Order;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.User;
 import com.internet.shop.service.OrderService;
+import com.internet.shop.service.ShoppingCartService;
 import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
     @Inject
     private OrderDao orderDao;
+    @Inject
+    private ShoppingCartService shoppingCartService;
 
     @Override
     public Order completeOrder(List<Product> products, User user) {
-        return orderDao.completeOrder(products, user);
+        Order order = orderDao.create(new Order(user, List.copyOf(products)));
+        //Order order = orderDao.completeOrder(List.copyOf(products), user);
+        shoppingCartService.clear(shoppingCartService.getByUserId(user.getId()));
+        return order;
     }
 
     @Override
@@ -26,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order get(Long id) {
-        return orderDao.get(id);
+        return orderDao.get(id).get();
     }
 
     @Override
