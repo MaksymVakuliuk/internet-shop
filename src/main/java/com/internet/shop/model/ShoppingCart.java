@@ -33,6 +33,6 @@ public class ShoppingCart {
         return "ShoppingCart{"
                 + "id=" + id
                 + ", user=" + user
-                + ", products=" + products + '}';
+                + ", products=" + products.stream().map(Product::toString) + '}';
     }
 }

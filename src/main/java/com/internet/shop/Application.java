@@ -2,12 +2,12 @@ package com.internet.shop;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
-import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.model.User;
 import com.internet.shop.service.ProductService;
 import com.internet.shop.service.ShoppingCartService;
 import com.internet.shop.service.UserService;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Application {
     private static Injector injector = Injector.getInstance("com.internet.shop");
@@ -15,10 +15,12 @@ public class Application {
     public static void main(String[] args) {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);
         UserService userService = (UserService) injector.getInstance(UserService.class);
-        ShoppingCartService shoppingCartService = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+        ShoppingCartService shoppingCartService = (ShoppingCartService) injector
+                .getInstance(ShoppingCartService.class);
 
         testProductDao(productService);
         testUserDao(userService);
+        testShoppingCartDao(shoppingCartService, userService, productService);
 
     }
 
@@ -59,25 +61,52 @@ public class Application {
             System.out.println(user.toString());
         }
     }
-    private static void testShoppingCartDao(ShoppingCartService shoppingCartService, UserService userService, ProductService productService) {
+
+    private static void testShoppingCartDao(ShoppingCartService shoppingCartService,
+                                            UserService userService,
+                                            ProductService productService) {
         List<User> users = userService.getAll();
         List<Product> products = productService.getAll();
-        ShoppingCart shoppingCart1 = new ShoppingCart(users.get(1), products.));
-        ShoppingCart shoppingCart2 = new ShoppingCart(users.get(2), products.get(1));
-        ShoppingCart shoppingCart3 = new ShoppingCart(userService.get(3), 29.0);
-        shoppingCartService.create(shoppingCart1);
-        shoppingCartService.create(shoppingCart2);
-        shoppingCartService.create(shoppingCart3);
-        shoppingCartService.delete(2L);
-        shoppingCartService.create(new ShoppingCart("PineApple", 45.0));
-        ShoppingCart newShoppingCart = new ShoppingCart("Apple", 12.2);
-        newShoppingCart.setId(1L);
-        shoppingCartService.update(newShoppingCart);
 
-        List<ShoppingCart> shoppingCarts = shoppingCartService.getAll();
-        for (ShoppingCart shoppingCart : shoppingCarts) {
-            System.out.println(shoppingCart.toString());
+        System.out.println("Add products to user 2");
+        shoppingCartService.addProduct(shoppingCartService.getByUserId(users.get(2).getId()),
+                products.get(1));
+        shoppingCartService.addProduct(shoppingCartService.getByUserId(users.get(2).getId()),
+                products.get(2));
+
+        System.out.println("Print products of user 2: ");
+        System.out.println(shoppingCartService
+                .getAllProducts(shoppingCartService.getByUserId(users.get(2).getId()))
+                .stream()
+                .map(product -> product.toString()).collect(Collectors.joining(" ")));
+
+        System.out.println("Print products of user 2 after clear: ");
+        shoppingCartService.clear(shoppingCartService.getByUserId(users.get(2).getId()));
+        System.out.println(shoppingCartService
+                .getAllProducts(shoppingCartService.getByUserId(users.get(2).getId()))
+                .stream()
+                .map(product -> product.toString()).collect(Collectors.joining(" ")));
+
+        System.out.println("Print products of user 2 after fill: ");
+        for (Product product : products) {
+            shoppingCartService.addProduct(shoppingCartService.getByUserId(users.get(2).getId()),
+                    product);
         }
+        System.out.println(shoppingCartService
+                .getAllProducts(shoppingCartService.getByUserId(users.get(2).getId()))
+                .stream()
+                .map(product -> product.toString()).collect(Collectors.joining(" ")));
+
+        System.out.println("delete product 3 of user 2: ");
+        shoppingCartService
+                .deleteProduct(shoppingCartService
+                        .getByUserId(users.get(2).getId()), products.get(2));
+
+        System.out.println("Print products of user 2 after remove: ");
+        System.out.println(shoppingCartService
+                .getAllProducts(shoppingCartService.getByUserId(users.get(2).getId()))
+                .stream()
+                .map(product -> product.toString()).collect(Collectors.joining(" ")));
     }
 
 }
