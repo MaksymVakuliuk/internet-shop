@@ -82,14 +82,14 @@ public class Application {
         System.out.println(shoppingCartService
                 .getAllProducts(shoppingCartService.getByUserId(users.get(2).getId()))
                 .stream()
-                .map(product -> product.toString()).collect(Collectors.joining(" ")));
+                .map(Product::toString).collect(Collectors.joining(" ")));
 
         System.out.println("Print products of user 2 after clear: ");
         shoppingCartService.clear(shoppingCartService.getByUserId(users.get(2).getId()));
         System.out.println(shoppingCartService
                 .getAllProducts(shoppingCartService.getByUserId(users.get(2).getId()))
                 .stream()
-                .map(product -> product.toString()).collect(Collectors.joining(" ")));
+                .map(Product::toString).collect(Collectors.joining(" ")));
 
         System.out.println("Print products of user 2 after fill: ");
         for (Product product : products) {
@@ -99,7 +99,7 @@ public class Application {
         System.out.println(shoppingCartService
                 .getAllProducts(shoppingCartService.getByUserId(users.get(2).getId()))
                 .stream()
-                .map(product -> product.toString()).collect(Collectors.joining(" ")));
+                .map(Product::toString).collect(Collectors.joining(" ")));
 
         System.out.println("delete product 3 of user 2: ");
         shoppingCartService
@@ -110,7 +110,7 @@ public class Application {
         System.out.println(shoppingCartService
                 .getAllProducts(shoppingCartService.getByUserId(users.get(2).getId()))
                 .stream()
-                .map(product -> product.toString()).collect(Collectors.joining(" ")));
+                .map(Product::toString).collect(Collectors.joining(" ")));
     }
 
     private static void testOrderService(OrderService orderService,
@@ -137,6 +137,5 @@ public class Application {
                 .stream()
                 .map(Order::toString)
                 .collect(Collectors.joining(" ")));
-
     }
 }
