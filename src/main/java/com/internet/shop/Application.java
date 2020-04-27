@@ -51,7 +51,7 @@ public class Application {
         }
     }
 
-    public static void testUserService(UserService userService) {
+    private static void testUserService(UserService userService) {
         var user1 = new User("people1", "people@1", "pass1");
         var user2 = new User("people2", "people@2", "pass2");
         var user3 = new User("people3", "people@3", "pass3");
