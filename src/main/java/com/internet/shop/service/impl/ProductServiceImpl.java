@@ -6,7 +6,6 @@ import com.internet.shop.lib.Service;
 import com.internet.shop.model.Product;
 import com.internet.shop.service.ProductService;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -19,8 +18,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> get(Long id) {
-        return productDao.get(id);
+    public Product get(Long id) {
+        return productDao.get(id).get();
     }
 
     @Override
