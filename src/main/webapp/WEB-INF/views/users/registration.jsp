@@ -8,12 +8,10 @@
     <%@include file="../header.html"%>
     <h1>Registration form</h1>
 
-    <h4 style="color:red">${message}</h4>
-
     <form method="post" action="${pageContext.request.contextPath}/users/registration">
         <p><label>
             Name:
-            <input name="name" type="text">
+            <input type="text" name="name">
         </label></p>
         <p><label>
             Login:

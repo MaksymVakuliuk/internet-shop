@@ -49,6 +49,15 @@
         <url-pattern>/products/all</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>addProduct</servlet-name>
+        <servlet-class>com.internet.shop.controllers.products.AddProductController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addProduct</servlet-name>
+        <url-pattern>/products/add</url-pattern>
+    </servlet-mapping>
+
     <listener>
         <listener-class>com.internet.shop.controllers.Initializer</listener-class>
     </listener>
