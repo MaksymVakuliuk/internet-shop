@@ -7,13 +7,16 @@
 <body>
     <%@include file="../header.html"%>
     <h1>Shopping Cart</h1>
-    User name: <c:out value="${shoppingCart.getUser().getName()}"/><br>
-
+    <div>
+        User name: <c:out value="${shoppingCart.getUser().getName()}"/><br>
+    </div>
+    <br>
     <table border="1">
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Price</th>
+            <th>Delete</th>
         </tr>
         <c:forEach var="product" items="${shoppingCart.getProducts()}">
             <tr>
@@ -25,6 +28,10 @@
                 </td>
                 <td>
                     <c:out value="${product.price}"/>
+                </td>
+                <td>
+                    <a href="${pageContext.request.contextPath}
+                        /shoppingCarts/removeProduct?productID=${product.id}">delete</a>
                 </td>
             </tr>
         </c:forEach>

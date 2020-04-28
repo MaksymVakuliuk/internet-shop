@@ -32,6 +32,9 @@
             </tr>
         </c:forEach>
     </table>
-    <a href="${pageContext.request.contextPath}/shoppingCarts/shoppingCart">Got to shopping cart</a>
+    <br>
+    <form method="get" action="${pageContext.request.contextPath}/shoppingCarts/shoppingCart">
+        <button>Go to shopping cart</button>
+    </form>
 </body>
 </html>
