@@ -11,6 +11,8 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Login</th>
+            <th>Delete</th>
         </tr>
         <c:forEach var="user" items="${users}">
             <tr>
@@ -19,6 +21,12 @@
                 </td>
                 <td>
                     <c:out value="${user.name}"/>
+                </td>
+                <td>
+                    <c:out value="${user.login}"/>
+                </td>
+                <td>
+                    <a href="/servlet/deleteUser?userID=${user.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>
