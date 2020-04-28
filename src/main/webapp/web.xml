@@ -58,6 +58,24 @@
         <url-pattern>/products/add</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>shoppingCart</servlet-name>
+        <servlet-class>com.internet.shop.controllers.shopping.carts.ShoppingCartController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>shoppingCart</servlet-name>
+        <url-pattern>/shoppingCarts/shoppingCart</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addToShoppingCart</servlet-name>
+        <servlet-class>com.internet.shop.controllers.shopping.carts.AddToShoppingCartController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addToShoppingCart</servlet-name>
+        <url-pattern>/shoppingCarts/addToShoppingCart</url-pattern>
+    </servlet-mapping>
+
     <listener>
         <listener-class>com.internet.shop.controllers.Initializer</listener-class>
     </listener>

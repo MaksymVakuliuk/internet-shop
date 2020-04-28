@@ -26,7 +26,8 @@
                     <c:out value="${user.login}"/>
                 </td>
                 <td>
-                    <a href="/servlet/deleteUser?userID=${user.id}">Delete</a>
+                    <a href="${pageContext.request.contextPath}
+                        /servlet/deleteUser?userID=${user.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>
