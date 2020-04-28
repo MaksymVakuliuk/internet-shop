@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AddToShoppingCartController extends HttpServlet {
+    private static final Long USER_ID = 1L;
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private final ShoppingCartService shoppingCartService =
             (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
@@ -22,9 +23,8 @@ public class AddToShoppingCartController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String productID = req.getParameter("productID");
-        String userID = req.getParameter("userID");
 
-        ShoppingCart shoppingCart = shoppingCartService.getByUserId(Long.valueOf(userID));
+        ShoppingCart shoppingCart = shoppingCartService.getByUserId(USER_ID);
         Product product = productService.get(Long.valueOf(productID));
         shoppingCartService.addProduct(shoppingCart, product);
         resp.sendRedirect(req.getContextPath() + "/products/all");
