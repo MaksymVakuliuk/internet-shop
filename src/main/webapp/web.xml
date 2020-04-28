@@ -31,8 +31,16 @@
         <url-pattern>/servlet/deleteUser</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>registrationUser</servlet-name>
+        <servlet-class>com.internet.shop.controllers.user.RegistrationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registrationUser</servlet-name>
+        <url-pattern>/users/registration</url-pattern>
+    </servlet-mapping>
+
     <listener>
         <listener-class>com.internet.shop.controllers.Initializer</listener-class>
     </listener>
-
 </web-app>
