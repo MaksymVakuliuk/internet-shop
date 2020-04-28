@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class Application {
     private static Injector injector = Injector.getInstance("com.internet.shop");
 
-    public static void main(String[] args) {
+    public static void start() {
         var productService = (ProductService) injector.getInstance(ProductService.class);
         testProductService(productService);
 
@@ -26,6 +26,10 @@ public class Application {
 
         var orderService = (OrderService) injector.getInstance(OrderService.class);
         testOrderService(orderService, shoppingCartService, userService);
+    }
+
+    public static void main(String[] args) {
+        start();
     }
 
     private static void testProductService(ProductService productService) {
