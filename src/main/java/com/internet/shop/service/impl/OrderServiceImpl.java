@@ -23,7 +23,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order completeOrder(List<Product> products, User user) {
         var order = orderDao.create(new Order(user, List.copyOf(products)));
-        shoppingCartService.clear(shoppingCartService.getByUserId(user.getId()));
         return order;
     }
 

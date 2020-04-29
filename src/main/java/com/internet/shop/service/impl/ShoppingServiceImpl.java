@@ -9,7 +9,6 @@ import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.service.ShoppingCartService;
 import com.internet.shop.service.UserService;
 import java.util.List;
-import java.util.stream.IntStream;
 
 @Service
 public class ShoppingServiceImpl implements ShoppingCartService {
@@ -36,9 +35,7 @@ public class ShoppingServiceImpl implements ShoppingCartService {
 
     @Override
     public void clear(ShoppingCart shoppingCart) {
-        IntStream.range(0, shoppingCart.getProducts().size())
-                .forEach(i -> shoppingCart.getProducts()
-                        .remove(shoppingCart.getProducts().size() - 1));
+        shoppingCart.getProducts().clear();
         shoppingCartDao.update(shoppingCart);
     }
 

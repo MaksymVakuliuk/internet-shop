@@ -12,6 +12,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Price</th>
+
             <th>Add to shopping cart</th>
         </tr>
         <c:forEach var="product" items="${products}">
@@ -33,7 +34,7 @@
         </c:forEach>
     </table>
     <br>
-    <form method="get" action="${pageContext.request.contextPath}/shoppingCarts/shoppingCart">
+    <form action="${pageContext.request.contextPath}/shoppingCarts/shoppingCart">
         <button>Go to shopping cart</button>
     </form>
 </body>
