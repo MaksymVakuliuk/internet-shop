@@ -103,6 +103,42 @@
         <url-pattern>/shoppingCarts/removeProduct</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>getAllOrders</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.GetAllOrdersController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getAllOrders</servlet-name>
+        <url-pattern>/orders/all</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>createOrder</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.CreateOrderController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>createOrder</servlet-name>
+        <url-pattern>/orders/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteOrder</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.DeleteOrderController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteOrder</servlet-name>
+        <url-pattern>/orders/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>showOrderInformation</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.ShowOrderInformationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>showOrderInformation</servlet-name>
+        <url-pattern>/orders/orderInformation</url-pattern>
+    </servlet-mapping>
+
     <listener>
         <listener-class>com.internet.shop.controllers.Initializer</listener-class>
     </listener>

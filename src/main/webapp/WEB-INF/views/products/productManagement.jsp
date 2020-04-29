@@ -22,7 +22,7 @@
         </form>
     </div>
 
-    <div id="tableOfAllUser">
+    <div id="tableOfAllProducts">
         <table border="1">
             <tr>
                 <th>ID</th>

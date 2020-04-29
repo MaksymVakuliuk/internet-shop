@@ -36,5 +36,13 @@
             </tr>
         </c:forEach>
     </table>
+
+    <br>
+
+    <form action="${pageContext.request.contextPath}/orders/create">
+        <button>Place an order</button>
+    </form>
+
+
 </body>
 </html>
