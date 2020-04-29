@@ -5,7 +5,7 @@
     <title>Add product</title>
 </head>
 <body>
-    <%@include file="../header.html"%>
+    <%@include file="../header.jsp"%>
 
     <div id="addProductForm">
         <h1>Add product form</h1>

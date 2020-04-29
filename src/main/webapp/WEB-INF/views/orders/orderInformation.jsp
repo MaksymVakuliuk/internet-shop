@@ -5,7 +5,7 @@
     <title>Order information</title>
 </head>
 <body>
-    <%@include file="../header.html"%>
+    <%@include file="../header.jsp"%>
     <h1>Order information</h1>
 
     <div>

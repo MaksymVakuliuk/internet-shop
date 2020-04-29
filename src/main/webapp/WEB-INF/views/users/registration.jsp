@@ -5,7 +5,7 @@
     <title>Registration</title>
 </head>
 <body>
-    <%@include file="../header.html"%>
+    <%@include file="../header.jsp"%>
     <h1>Registration form</h1>
 
     <form method="post" action="${pageContext.request.contextPath}/users/registration">

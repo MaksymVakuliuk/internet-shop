@@ -5,7 +5,7 @@
     <title>Oll orders</title>
 </head>
 <body>
-    <%@include file="../header.html"%>
+    <%@include file="../header.jsp"%>
     <h1>All orders</h1>
 
     <div id="tableOfAllOrders">
