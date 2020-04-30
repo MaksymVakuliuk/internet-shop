@@ -5,13 +5,14 @@
     <title>All products</title>
 </head>
 <body>
-    <%@include file="../header.html"%>
+    <%@include file="../header.jsp"%>
     <h1>All Products</h1>
     <table border="1">
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Price</th>
+
             <th>Add to shopping cart</th>
         </tr>
         <c:forEach var="product" items="${products}">
@@ -32,6 +33,9 @@
             </tr>
         </c:forEach>
     </table>
-    <a href="${pageContext.request.contextPath}/shoppingCarts/shoppingCart">Got to shopping cart</a>
+    <br>
+    <form action="${pageContext.request.contextPath}/shoppingCarts/shoppingCart">
+        <button>Go to shopping cart</button>
+    </form>
 </body>
 </html>
