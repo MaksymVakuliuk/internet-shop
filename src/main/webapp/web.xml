@@ -41,6 +41,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>authenticationUser</servlet-name>
+        <servlet-class>com.internet.shop.controllers.user.AuthenticationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>authenticationUser</servlet-name>
+        <url-pattern>/users/authentication</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>allProducts</servlet-name>
         <servlet-class>com.internet.shop.controllers.products.GetAllProductsController</servlet-class>
     </servlet>
