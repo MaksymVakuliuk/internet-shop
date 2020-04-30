@@ -2,12 +2,14 @@ package com.internet.shop.controllers.user;
 
 import com.internet.shop.exceptions.AuthenticationException;
 import com.internet.shop.lib.Injector;
+import com.internet.shop.model.User;
 import com.internet.shop.security.AuthenticationService;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class AuthenticationController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
@@ -27,7 +29,9 @@ public class AuthenticationController extends HttpServlet {
         String password = req.getParameter("pwd");
 
         try {
-            authenticationService.login(login, password);
+            User user = authenticationService.login(login, password);
+            HttpSession session = req.getSession();
+            session.setAttribute("userID", user.getId());
         } catch (AuthenticationException e) {
             req.setAttribute("errorMessage", e.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/users/authentication.jsp").forward(req, resp);
