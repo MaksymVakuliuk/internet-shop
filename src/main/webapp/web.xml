@@ -50,6 +50,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>logOutUser</servlet-name>
+        <servlet-class>com.internet.shop.controllers.user.LogOutController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logOutUser</servlet-name>
+        <url-pattern>/users/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>allProducts</servlet-name>
         <servlet-class>com.internet.shop.controllers.products.GetAllProductsController</servlet-class>
     </servlet>

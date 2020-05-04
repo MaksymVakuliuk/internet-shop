@@ -6,7 +6,8 @@
         | <a href="/products/productManagement">ProductManagement</a>
         | <a href="/shoppingCarts/shoppingCart">Shopping Cart</a>
         | <a href="/orders/all">All orders</a>
-        | <a href="/users/authentication">Sign In</a>
+        | <a href="/users/authentication">Log In</a>
+        | <a href="/users/logout">Log Out</a>
         | <a href="/users/registration">Sign Up</a>
     </nav>
 </header>

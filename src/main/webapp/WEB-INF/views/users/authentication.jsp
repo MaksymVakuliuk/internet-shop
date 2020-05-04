@@ -2,11 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Sign in</title>
+    <title>Log in</title>
 </head>
 <body>
     <%@include file="../header.jsp"%>
-    <h1>Sign in</h1>
+    <h1>Log In</h1>
     <br>
     <h4 style="color: red"><c:out value="${errorMessage}"/></h4>
     <div id="SignIn">
@@ -19,7 +19,7 @@
                 Password:
                 <input type="password" name="pwd">
             </label></p>
-            <button type="submit">Sign in</button>
+            <button type="submit">Log In</button>
         </form>
     </div>
 </body>
