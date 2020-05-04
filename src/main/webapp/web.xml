@@ -41,6 +41,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>authenticationUser</servlet-name>
+        <servlet-class>com.internet.shop.controllers.user.AuthenticationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>authenticationUser</servlet-name>
+        <url-pattern>/users/authentication</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>allProducts</servlet-name>
         <servlet-class>com.internet.shop.controllers.products.GetAllProductsController</servlet-class>
     </servlet>
@@ -138,6 +147,17 @@
         <servlet-name>showOrderInformation</servlet-name>
         <url-pattern>/orders/orderInformation</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>authenticationFilter</filter-name>
+        <filter-class>com.internet.shop.web.filters.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/orders/*</url-pattern>
+        <url-pattern>/products/productManagement</url-pattern>
+        <url-pattern>/users/all</url-pattern>
+    </filter-mapping>
 
     <listener>
         <listener-class>com.internet.shop.controllers.Initializer</listener-class>
