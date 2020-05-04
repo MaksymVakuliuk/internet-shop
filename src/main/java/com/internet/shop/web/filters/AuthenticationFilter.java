@@ -29,13 +29,11 @@ public class AuthenticationFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
-
         Long userID = (Long) req.getSession().getAttribute(USER_ID);
         if (userID == null || userService.get(userID) == null) {
             resp.sendRedirect("/users/authentication");
             return;
         }
-
         filterChain.doFilter(req, resp);
     }
 
