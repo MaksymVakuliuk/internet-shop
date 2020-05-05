@@ -5,7 +5,7 @@
     <title>Shopping cart</title>
 </head>
 <body>
-    <%@include file="../header.jsp"%>
+    <%@include file="../headers/header.jsp"%>
     <h1>Shopping Cart</h1>
     <div>
         User name: <c:out value="${shoppingCart.getUser().getName()}"/><br>

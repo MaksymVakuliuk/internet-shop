@@ -5,7 +5,7 @@
       <title>Title</title>
 </head>
 <body>
-    <%@ include file="header.jsp"%>
+    <%@ include file="./headers/header.jsp"%>
     <h1>Hello world!</h1>
 </body>
 </html>

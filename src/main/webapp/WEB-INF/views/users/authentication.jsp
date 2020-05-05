@@ -5,7 +5,7 @@
     <title>Log in</title>
 </head>
 <body>
-    <%@include file="../header.jsp"%>
+    <%@include file="../headers/header.jsp"%>
     <h1>Log In</h1>
     <br>
     <h4 style="color: red"><c:out value="${errorMessage}"/></h4>

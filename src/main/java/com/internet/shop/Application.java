@@ -3,11 +3,13 @@ package com.internet.shop;
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Order;
 import com.internet.shop.model.Product;
+import com.internet.shop.model.Role;
 import com.internet.shop.model.User;
 import com.internet.shop.service.OrderService;
 import com.internet.shop.service.ProductService;
 import com.internet.shop.service.ShoppingCartService;
 import com.internet.shop.service.UserService;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Application {
@@ -19,7 +21,6 @@ public class Application {
 
         var userService = (UserService) injector.getInstance(UserService.class);
         testUserService(userService);
-
         var shoppingCartService = (ShoppingCartService) injector
                 .getInstance(ShoppingCartService.class);
         testShoppingCartService(shoppingCartService, userService, productService);
@@ -52,16 +53,22 @@ public class Application {
     }
 
     private static void testUserService(UserService userService) {
+        var admin = new User("admin", "admin", "admin");
+        admin.setRoles(Set.of(Role.of("ADMIN")));
+        userService.create(admin);
+
+        var userTest = new User("1", "1", "1");
+        userTest.setRoles(Set.of(Role.of("USER")));
         var user1 = new User("people1", "people@1", "pass1");
         var user2 = new User("people2", "people@2", "pass2");
         var user3 = new User("people3", "people@3", "pass3");
+        userService.create(userTest);
         userService.create(user1);
         userService.create(user2);
         userService.create(user3);
-        userService.delete(2L);
+        userService.delete(3L);
         userService.create(new User("people4", "people@4", "pass4"));
         var newUser = new User("newPeople", "people@newPeople", "newPass");
-        newUser.setId(1L);
         userService.update(newUser);
 
         var users = userService.getAll();

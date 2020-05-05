@@ -5,7 +5,7 @@
     <title>Order information</title>
 </head>
 <body>
-    <%@include file="../header.jsp"%>
+    <%@include file="../headers/header.jsp"%>
     <h1>Order information</h1>
 
     <div>
@@ -40,7 +40,5 @@
         </table>
     </div>
     <br>
-
-
 </body>
 </html>

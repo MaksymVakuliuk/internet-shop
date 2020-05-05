@@ -1,9 +1,11 @@
-package com.internet.shop.controllers.user;
+package com.internet.shop.controllers.users;
 
 import com.internet.shop.lib.Injector;
+import com.internet.shop.model.Role;
 import com.internet.shop.model.User;
 import com.internet.shop.service.UserService;
 import java.io.IOException;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,7 @@ public class RegistrationController extends HttpServlet {
 
         if (pwd.equals(pwdConfirm)) {
             userService.create(new User(name, login, pwd));
+            userService.findByLogin(login).get().setRoles(Set.of(Role.of("USER")));
             resp.sendRedirect(req.getContextPath() + "/");
         } else {
             req.setAttribute("message", "Your password aren't the same.");

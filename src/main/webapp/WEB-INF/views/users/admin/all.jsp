@@ -5,13 +5,15 @@
     <title>All users</title>
 </head>
 <body>
-    <%@include file="../header.jsp"%>
+    <%@include file="../../headers/header.jsp"%>
+
     <h1>All Users</h1>
     <table border="1">
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Login</th>
+            <th>Show orders</th>
             <th>Delete</th>
         </tr>
         <c:forEach var="user" items="${users}">
@@ -27,7 +29,11 @@
                 </td>
                 <td>
                     <a href="${pageContext.request.contextPath}
-                        /servlet/deleteUser?userID=${user.id}">Delete</a>
+                        /orders/admin/allOrdersOfUser?userID=${user.id}">show orders</a>
+                </td>
+                <td>
+                    <a href="${pageContext.request.contextPath}
+                        /users/admin/deleteUser?userID=${user.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

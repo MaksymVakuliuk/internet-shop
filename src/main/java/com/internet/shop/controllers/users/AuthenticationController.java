@@ -1,4 +1,4 @@
-package com.internet.shop.controllers.user;
+package com.internet.shop.controllers.users;
 
 import com.internet.shop.exceptions.AuthenticationException;
 import com.internet.shop.lib.Injector;

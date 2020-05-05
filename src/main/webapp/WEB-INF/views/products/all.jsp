@@ -5,7 +5,7 @@
     <title>All products</title>
 </head>
 <body>
-    <%@include file="../header.jsp"%>
+    <%@include file="../headers/header.jsp"%>
     <h1>All Products</h1>
     <table border="1">
         <tr>

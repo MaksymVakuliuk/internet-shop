@@ -21,7 +21,7 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        urls = Set.of("/users/registration", "/users/authentication", "/products/all");
+        urls = Set.of("/users/registration", "/users/authentication", "/products/all", "/");
     }
 
     @Override
@@ -39,7 +39,7 @@ public class AuthenticationFilter implements Filter {
 
         Long userID = (Long) req.getSession().getAttribute(USER_ID);
         if (userID == null || userService.get(userID) == null) {
-            resp.sendRedirect("/users/authentication");
+            resp.sendRedirect(req.getContextPath() + "/users/authentication");
             return;
         }
         filterChain.doFilter(req, resp);

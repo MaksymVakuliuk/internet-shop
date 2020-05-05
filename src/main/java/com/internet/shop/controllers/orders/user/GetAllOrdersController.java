@@ -1,4 +1,4 @@
-package com.internet.shop.controllers.orders;
+package com.internet.shop.controllers.orders.user;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Order;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class GetAllOrdersOfUserController extends HttpServlet {
+public class GetAllOrdersController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private final OrderService orderService =
             (OrderService) INJECTOR.getInstance(OrderService.class);

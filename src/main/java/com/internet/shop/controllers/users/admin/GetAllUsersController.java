@@ -1,4 +1,4 @@
-package com.internet.shop.controllers.user;
+package com.internet.shop.controllers.users.admin;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.User;
@@ -20,7 +20,7 @@ public class GetAllUsersController extends HttpServlet {
         List<User> allUser = userService.getAll();
 
         req.setAttribute("users", allUser);
-        req.getRequestDispatcher("/WEB-INF/views/users/all.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/users/admin/all.jsp").forward(req, resp);
     }
 }
 
