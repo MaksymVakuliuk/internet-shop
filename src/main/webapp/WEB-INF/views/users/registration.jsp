@@ -4,7 +4,7 @@
     <title>Registration</title>
 </head>
 <body>
-    <%@include file="../header.jsp"%>
+    <%@include file="../headers/header.jsp"%>
     <h1>Registration form</h1>
     <br>
     <div id="SignUp">

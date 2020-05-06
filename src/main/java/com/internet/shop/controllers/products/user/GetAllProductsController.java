@@ -1,4 +1,4 @@
-package com.internet.shop.controllers.products;
+package com.internet.shop.controllers.products.user;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;

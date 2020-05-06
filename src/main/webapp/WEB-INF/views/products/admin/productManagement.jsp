@@ -5,11 +5,11 @@
     <title>Add product</title>
 </head>
 <body>
-    <%@include file="../header.jsp"%>
+    <%@include file="../../headers/header.jsp"%>
 
     <div id="addProductForm">
         <h1>Add product form</h1>
-        <form method="post" action="${pageContext.request.contextPath}/products/add">
+        <form method="post" action="${pageContext.request.contextPath}/products/admin/add">
             <p><label>
                 Name:
                 <input type="text" name="name">
@@ -43,7 +43,7 @@
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}
-                        /products/delete?productID=${product.id}">delete</a>
+                        /products/admin/delete?productID=${product.id}">delete</a>
                     </td>
                 </tr>
             </c:forEach>

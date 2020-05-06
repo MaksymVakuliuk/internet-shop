@@ -5,7 +5,8 @@
     <title>Oll orders</title>
 </head>
 <body>
-    <%@include file="../headers/header.jsp"%>
+    <%@include file="../../headers/header.jsp"%>
+
     <h1>All orders</h1>
 
     <div id="tableOfAllOrders">
@@ -14,6 +15,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Order information</th>
+                <th>Delete</th>
             </tr>
             <c:forEach var="order" items="${orders}">
                 <tr>
@@ -26,6 +28,10 @@
                     <td>
                         <a href="${pageContext.request.contextPath}
                             /orders/orderInformation?orderID=${order.id}">Show</a>
+                    </td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}
+                            /orders/admin/delete?orderID=${order.id}">delete</a>
                     </td>
                 </tr>
             </c:forEach>
