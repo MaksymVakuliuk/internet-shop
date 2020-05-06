@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class GetAllOrdersOfUserController extends HttpServlet {
+public class GetUserOrdersController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private final OrderService orderService =
             (OrderService) INJECTOR.getInstance(OrderService.class);
@@ -25,7 +25,7 @@ public class GetAllOrdersOfUserController extends HttpServlet {
         User user = userService.get(Long.valueOf(userID));
         List<Order> orders = orderService.getUserOrders(user);
         req.setAttribute("orders", orders);
-        req.getRequestDispatcher("/WEB-INF/views/orders/admin/allOrdersOfUser.jsp")
+        req.getRequestDispatcher("/WEB-INF/views/orders/admin/userOrders.jsp")
                 .forward(req, resp);
     }
 }

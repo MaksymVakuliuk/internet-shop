@@ -30,8 +30,9 @@ public class RegistrationController extends HttpServlet {
         String pwdConfirm = req.getParameter("pwd-confirm");
 
         if (pwd.equals(pwdConfirm)) {
-            userService.create(new User(name, login, pwd));
-            userService.findByLogin(login).get().setRoles(Set.of(Role.of("USER")));
+            User user = new User(name, login, pwd);
+            user.setRoles(Set.of(Role.of("USER")));
+            userService.create(user);
             resp.sendRedirect(req.getContextPath() + "/");
         } else {
             req.setAttribute("message", "Your password aren't the same.");

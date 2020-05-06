@@ -141,12 +141,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>getAllOrdersOfUser</servlet-name>
-        <servlet-class>com.internet.shop.controllers.orders.admin.GetAllOrdersOfUserController</servlet-class>
+        <servlet-name>getUserOrder</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.admin.GetUserOrdersController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>getAllOrdersOfUser</servlet-name>
-        <url-pattern>/orders/admin/allOrdersOfUser</url-pattern>
+        <servlet-name>getUserOrder</servlet-name>
+        <url-pattern>/orders/admin/userOrders</url-pattern>
     </servlet-mapping>
 
     <servlet>
