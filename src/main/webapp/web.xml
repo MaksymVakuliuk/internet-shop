@@ -124,7 +124,7 @@
 
     <servlet>
         <servlet-name>getAllOrders</servlet-name>
-        <servlet-class>com.internet.shop.controllers.orders.user.GetAllOrdersController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.orders.user.GetCurrentUserOrdersController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getAllOrders</servlet-name>
