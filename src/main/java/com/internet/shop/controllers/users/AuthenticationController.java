@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 public class AuthenticationController extends HttpServlet {
+    private static final Logger LOGGER = Logger.getLogger(AuthenticationController.class);
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private static AuthenticationService authenticationService =
             (AuthenticationService) INJECTOR.getInstance(AuthenticationService.class);
@@ -33,6 +35,7 @@ public class AuthenticationController extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("userID", user.getId());
         } catch (AuthenticationException e) {
+            LOGGER.warn(e.getMessage());
             req.setAttribute("errorMessage", e.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/users/authentication.jsp").forward(req, resp);
         }
