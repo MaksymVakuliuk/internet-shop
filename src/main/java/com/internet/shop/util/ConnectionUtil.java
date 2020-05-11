@@ -8,7 +8,7 @@ import java.util.Properties;
 public class ConnectionUtil {
     static {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Can't find MySQL Driver", e);
         }
@@ -18,7 +18,7 @@ public class ConnectionUtil {
         Properties dbProperties = new Properties();
         dbProperties.put("user", "MaksymV");
         dbProperties.put("password", "internetShopDBofVM");
-        String url = "jdbc:mysql://localhost:33060";
+        String url = "jdbc:mysql://localhost:3306/internet-shop?serverTimezone=UTC";
 
         try {
             return DriverManager.getConnection(url, dbProperties);

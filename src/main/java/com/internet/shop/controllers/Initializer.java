@@ -19,12 +19,12 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        var product1 = new Product("Apple", 10.0);
-        var product2 = new Product("Orange", 15.0);
-        var product3 = new Product("Banana", 29.0);
-        productService.create(product1);
-        productService.create(product2);
-        productService.create(product3);
+//        var product1 = new Product("Apple", 10.0);
+//        var product2 = new Product("Orange", 15.0);
+//        var product3 = new Product("Banana", 29.0);
+//        productService.create(product1);
+//        productService.create(product2);
+//        productService.create(product3);
 
         var admin = new User("admin", "admin", "admin");
         admin.setRoles(Set.of(Role.of("ADMIN")));
