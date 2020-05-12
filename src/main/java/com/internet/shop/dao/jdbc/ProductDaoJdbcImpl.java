@@ -17,7 +17,6 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public Product create(Product product) {
         String query = "INSERT INTO products (name, price) VALUES (? , ?)";
-
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement preparedStatement =
                     connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -37,23 +36,17 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public Optional<Product> get(Long id) {
         String query = "SELECT * FROM products WHERE product_id = ?";
-
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Long productID = resultSet.getLong("product_id");
-                String name = resultSet.getString("name");
-                Double price = resultSet.getDouble("price");
-                Product product = new Product(name, price);
-                product.setId(productID);
+                Product product = getProductFromResultSet(resultSet);
                 return Optional.of(product);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Unable to get product with ID = " + id, e);
         }
-
         return Optional.empty();
     }
 
@@ -61,7 +54,6 @@ public class ProductDaoJdbcImpl implements ProductDao {
     public List<Product> getAll() {
         String query = "SELECT * FROM products";
         List<Product> products = new ArrayList<>();
-
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -78,7 +70,6 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public Product update(Product product) {
         String query = "UPDATE products SET NAME = ?, PRICE = ? WHERE product_id = ?";
-
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, product.getName());
