@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getUserOrders(User user) {
         return orderDao.getAll()
                 .stream()
-                .filter(order -> order.getUserId().equals(user.getId()))
+                .filter(order -> order.getUserID().equals(user.getId()))
                 .collect(Collectors.toList());
     }
 

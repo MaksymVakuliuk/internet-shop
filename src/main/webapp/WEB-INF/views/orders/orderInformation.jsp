@@ -10,9 +10,9 @@
 
     <div>
         <h4>User info</h4>
-        User id: <c:out value="${order.user.id}"/><br>
-        User name: <c:out value="${order.user.name}"/><br>
-        User login: <c:out value="${order.user.login}"/>
+        User id: <c:out value="${user.id}"/><br>
+        User name: <c:out value="${user.name}"/><br>
+        User login: <c:out value="${user.login}"/>
     </div>
 
     <br>

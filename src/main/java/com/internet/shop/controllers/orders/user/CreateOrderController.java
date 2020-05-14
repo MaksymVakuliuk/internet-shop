@@ -3,7 +3,6 @@ package com.internet.shop.controllers.orders.user;
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
-import com.internet.shop.model.User;
 import com.internet.shop.service.OrderService;
 import com.internet.shop.service.ShoppingCartService;
 import java.io.IOException;

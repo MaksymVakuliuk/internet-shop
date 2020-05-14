@@ -1,37 +1,42 @@
 package com.internet.shop.dao.jdbc;
 
 import com.internet.shop.dao.UserDao;
-import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Role;
 import com.internet.shop.model.User;
 import com.internet.shop.util.ConnectionUtil;
-import java.sql.*;
-import java.util.*;
-import java.util.stream.IntStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Dao
 public class UserDaoJdbcImpl implements UserDao {
     @Override
     public User create(User user) {
-       String insertUserParametersQuery
-               = "INSERT INTO users (name, login, password) VALUES (?, ?, ?);";
-       try (Connection connection = ConnectionUtil.getConnection()) {
-           PreparedStatement createUserStatement =
-                   connection.prepareStatement(insertUserParametersQuery, PreparedStatement.RETURN_GENERATED_KEYS);
-           createUserStatement.setString(1, user.getName());
-           createUserStatement.setString(2, user.getLogin());
-           createUserStatement.setString(3, user.getPassword());
-           createUserStatement.executeUpdate();
-           ResultSet resultSet = createUserStatement.getGeneratedKeys();
-           if (resultSet.next()) {
-               user.setId(resultSet.getLong(1));
-           }
-           setRolesToUser(user);
-           return user;
-       } catch (SQLException e) {
-           throw new RuntimeException("Unable to create user: ", e);
-       }
+        String query =
+                "INSERT INTO users (name, login, password) VALUES (?, ?, ?);";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                user.setId(resultSet.getLong(1));
+            }
+            setRolesToUser(user);
+            return user;
+        } catch (SQLException e) {
+            throw new RuntimeException("Unable to create user: ", e);
+        }
     }
 
     @Override
@@ -70,31 +75,32 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User update(User user) {
-        String updateUserQuery = "UPDATE TABLE users SET name = ?, user = ?, password = ? WHERE user_id = ?;";
+        String query = "UPDATE TABLE users SET name = ?, user = ?, password = ? "
+                + "WHERE user_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement updateUserStatement = connection.prepareStatement(updateUserQuery);
-            updateUserStatement.setString(1, user.getName());
-            updateUserStatement.setString(2, user.getLogin());
-            updateUserStatement.setString(3, user.getPassword());
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setString(3, user.getPassword());
             deleteRolesOfUser(user.getId());
             setRolesToUser(user);
             return user;
-        } catch (SQLException  e) {
+        } catch (SQLException e) {
             throw new RuntimeException("Unable to update user  = " + user.toString() + ": ", e);
         }
     }
 
     @Override
     public boolean delete(Long id) {
-        String deleteUserQuery = "DELETE FROM users WHERE user_id = ?;";
+        String query = "DELETE FROM users WHERE user_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             deleteRolesOfUser(id);
-            PreparedStatement deleteUserStatement
-                    = connection.prepareStatement(deleteUserQuery);
-            deleteUserStatement.setLong(1, id);
-            return deleteUserStatement.executeUpdate() != 0;
+            PreparedStatement preparedStatement
+                    = connection.prepareStatement(query);
+            preparedStatement.setLong(1, id);
+            return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to delete user with id = " + id + ": " , e);
+            throw new RuntimeException("Unable to delete user with id = " + id + ": ", e);
         }
     }
 
@@ -110,10 +116,9 @@ public class UserDaoJdbcImpl implements UserDao {
     }
 
     private Set<Role> getUsersRoleByUserId(Long id) throws SQLException {
-        String query = "SELECT role_name FROM users_roles " +
-                "JOIN roles USING (role_id) " +
-                "WHERE user_id = ?;";
-
+        String query = "SELECT role_name FROM users_roles "
+                + "JOIN roles USING (role_id) "
+                + "WHERE user_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
