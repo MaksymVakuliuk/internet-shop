@@ -22,7 +22,7 @@ public class UserDaoJdbcImpl implements UserDao {
         String query =
                 "INSERT INTO users (name, login, password) VALUES (?, ?, ?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement =
+            var preparedStatement =
                     connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getLogin());
@@ -43,11 +43,11 @@ public class UserDaoJdbcImpl implements UserDao {
     public Optional<User> get(Long id) {
         String query = "SELECT * FROM users WHERE user_id = ?";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            var preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                User user = getUserFromResultSet(resultSet);
+                var user = getUserFromResultSet(resultSet);
                 return Optional.of(user);
             }
         } catch (SQLException e) {
@@ -60,11 +60,11 @@ public class UserDaoJdbcImpl implements UserDao {
     public List<User> getAll() {
         String query = "SELECT * FROM users";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            var preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
-                User user = getUserFromResultSet(resultSet);
+                var user = getUserFromResultSet(resultSet);
                 users.add(user);
             }
             return users;
@@ -78,7 +78,7 @@ public class UserDaoJdbcImpl implements UserDao {
         String query = "UPDATE TABLE users SET name = ?, user = ?, password = ? "
                 + "WHERE user_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            var preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getLogin());
             preparedStatement.setString(3, user.getPassword());
@@ -95,8 +95,7 @@ public class UserDaoJdbcImpl implements UserDao {
         String query = "DELETE FROM users WHERE user_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             deleteRolesOfUser(id);
-            PreparedStatement preparedStatement
-                    = connection.prepareStatement(query);
+            var preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
@@ -105,12 +104,12 @@ public class UserDaoJdbcImpl implements UserDao {
     }
 
     private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
-        Long userID = resultSet.getLong("user_id");
+        Long userId = resultSet.getLong("user_id");
         String name = resultSet.getString("name");
         String login = resultSet.getString("login");
         String password = resultSet.getString("password");
         User user = new User(name, login, password);
-        user.setId(userID);
+        user.setId(userId);
         user.setRoles(getUsersRoleByUserId(user.getId()));
         return user;
     }
@@ -120,7 +119,7 @@ public class UserDaoJdbcImpl implements UserDao {
                 + "JOIN roles USING (role_id) "
                 + "WHERE user_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            var preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             Set<Role> roles = new HashSet<>();
@@ -135,15 +134,14 @@ public class UserDaoJdbcImpl implements UserDao {
         String getRoleIdQuery = "SELECT role_id FROM roles WHERE role_name = ?;";
         String insertRolesToUserQuery
                 = "INSERT INTO users_roles (user_id, role_id) VALUES (?, ?); ";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            for (Role role : user.getRoles()) {
-                PreparedStatement getRoleIdStatement
-                        = connection.prepareStatement(getRoleIdQuery);
+        for (Role role : user.getRoles()) {
+            try (Connection connection = ConnectionUtil.getConnection()) {
+                var getRoleIdStatement = connection.prepareStatement(getRoleIdQuery);
                 getRoleIdStatement.setString(1, role.getRoleName().name());
                 ResultSet resultSet = getRoleIdStatement.executeQuery();
                 if (resultSet.next()) {
-                    PreparedStatement insertRolesToUserStatement
-                            = connection.prepareStatement(insertRolesToUserQuery);
+                    var insertRolesToUserStatement =
+                            connection.prepareStatement(insertRolesToUserQuery);
                     insertRolesToUserStatement.setLong(1, user.getId());
                     insertRolesToUserStatement.setLong(2, resultSet.getLong("role_id"));
                     insertRolesToUserStatement.executeUpdate();
@@ -155,7 +153,7 @@ public class UserDaoJdbcImpl implements UserDao {
     private void deleteRolesOfUser(Long id) throws SQLException {
         String query = "DELETE FROM users_roles WHERE user_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            var preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         }

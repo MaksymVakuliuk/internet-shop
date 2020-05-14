@@ -6,7 +6,7 @@ import com.internet.shop.model.User;
 import java.util.List;
 
 public interface OrderService extends GenericService<Order, Long> {
-    Order completeOrder(List<Product> products, Long userID);
+    Order completeOrder(List<Product> products, Long userId);
 
     List<Order> getUserOrders(User user);
 }

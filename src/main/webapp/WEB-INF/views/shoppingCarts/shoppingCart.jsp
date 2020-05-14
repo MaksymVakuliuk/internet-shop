@@ -31,7 +31,7 @@
                 </td>
                 <td>
                     <a href="${pageContext.request.contextPath}
-                        /shoppingCarts/removeProduct?productID=${product.id}">delete</a>
+                        /shoppingCarts/removeProduct?productId=${product.id}">delete</a>
                 </td>
             </tr>
         </c:forEach>

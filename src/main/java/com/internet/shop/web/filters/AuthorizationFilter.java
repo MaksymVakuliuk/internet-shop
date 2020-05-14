@@ -51,7 +51,7 @@ public class AuthorizationFilter implements Filter {
             return;
         }
 
-        User user = userService.get((Long) req.getSession().getAttribute("userID"));
+        User user = userService.get((Long) req.getSession().getAttribute("userId"));
         if (isAuthorized(user, protectedUrls.get(requestUrl))) {
             filterChain.doFilter(req, resp);
         } else {

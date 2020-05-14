@@ -20,9 +20,9 @@ public class ShowOrderInformationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String orderID = req.getParameter("orderID");
-        Order order = orderService.get(Long.valueOf(orderID));
-        User user = userService.get(order.getUserID());
+        String orderId = req.getParameter("orderId");
+        Order order = orderService.get(Long.valueOf(orderId));
+        User user = userService.get(order.getUserId());
         req.setAttribute("order", order);
         req.setAttribute("user", user);
         req.getRequestDispatcher("/WEB-INF/views/orders/orderInformation.jsp")

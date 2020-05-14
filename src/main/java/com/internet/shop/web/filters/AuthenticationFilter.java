@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AuthenticationFilter implements Filter {
-    private static final String USER_ID = "userID";
+    private static final String USER_ID = "userId";
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private static UserService userService = (UserService) INJECTOR.getInstance(UserService.class);
     private Set<String> urls;
@@ -37,8 +37,8 @@ public class AuthenticationFilter implements Filter {
             return;
         }
 
-        Long userID = (Long) req.getSession().getAttribute(USER_ID);
-        if (userID == null || userService.get(userID) == null) {
+        Long userId = (Long) req.getSession().getAttribute(USER_ID);
+        if (userId == null || userService.get(userId) == null) {
             resp.sendRedirect(req.getContextPath() + "/users/authentication");
             return;
         }

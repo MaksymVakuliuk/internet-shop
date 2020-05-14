@@ -16,14 +16,13 @@ import java.util.Optional;
 
 @Dao
 public class OrderDaoJdbcImpl implements OrderDao {
-
     @Override
     public Order create(Order order) {
         String query = "INSERT INTO orders (user_id) VALUES (?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement =
+            var preparedStatement =
                     connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setLong(1, order.getUserID());
+            preparedStatement.setLong(1, order.getUserId());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -40,11 +39,11 @@ public class OrderDaoJdbcImpl implements OrderDao {
     public Optional<Order> get(Long id) {
         String query = "SELECT * FROM orders WHERE order_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            var preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Order order = getOrderFromResultSet(resultSet);
+                var order = getOrderFromResultSet(resultSet);
                 return Optional.of(order);
             }
         } catch (SQLException e) {
@@ -57,11 +56,11 @@ public class OrderDaoJdbcImpl implements OrderDao {
     public List<Order> getAll() {
         String query = "SELECT * FROM orders;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            var preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Order> orders = new ArrayList<>();
             while (resultSet.next()) {
-                Order order = getOrderFromResultSet(resultSet);
+                var order = getOrderFromResultSet(resultSet);
                 orders.add(order);
             }
             return orders;
@@ -87,7 +86,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
         String query = "DELETE FROM orders WHERE order_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             deleteShoppingCartProducts(id);
-            PreparedStatement preparedStatement
+            var preparedStatement
                     = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
@@ -99,50 +98,49 @@ public class OrderDaoJdbcImpl implements OrderDao {
     private void insertOrderCartProducts(Order order) throws SQLException {
         String query =
                 "INSERT INTO orders_products (order_id, product_id) VALUES (?, ?);";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement(query);
-            for (Product product : order.getProducts()) {
+        for (Product product : order.getProducts()) {
+            try (Connection connection = ConnectionUtil.getConnection()) {
+                var preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setLong(1, order.getId());
                 preparedStatement.setLong(2, product.getId());
                 preparedStatement.executeUpdate();
             }
         }
+
     }
 
-    private void deleteShoppingCartProducts(Long orderID) throws SQLException {
+    private void deleteShoppingCartProducts(Long orderId) throws SQLException {
         String query =
                 "DELETE FROM orders_products WHERE order_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement
-                    = connection.prepareStatement(query);
-            preparedStatement.setLong(1, orderID);
+            var preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, orderId);
             preparedStatement.executeUpdate();
         }
     }
 
     private Order getOrderFromResultSet(ResultSet resultSet) throws SQLException {
-        Long orderID = resultSet.getLong("order_id");
-        Long userID = resultSet.getLong("user_id");
-        List<Product> products = getProductsOfOrder(orderID);
-        Order order = new Order(userID, products);
-        order.setId(orderID);
+        Long orderId = resultSet.getLong("order_id");
+        Long userId = resultSet.getLong("user_id");
+        List<Product> products = getProductsOfOrder(orderId);
+        Order order = new Order(userId, products);
+        order.setId(orderId);
         return order;
     }
 
-    private List<Product> getProductsOfOrder(Long orderID) throws SQLException {
+    private List<Product> getProductsOfOrder(Long orderId) throws SQLException {
         String query = "SELECT product_id FROM products "
                 + "JOIN orders_products USING(product_id) "
                 + "WHERE order_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement =
+            var preparedStatement =
                     connection.prepareStatement(query);
-            preparedStatement.setLong(1, orderID);
+            preparedStatement.setLong(1, orderId);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Product> products = new ArrayList<>();
             while (resultSet.next()) {
                 ProductDao productDao = new ProductDaoJdbcImpl();
-                Product product = productDao.get(resultSet.getLong("product_id")).get();
+                var product = productDao.get(resultSet.getLong("product_id")).get();
                 products.add(product);
             }
             return products;
