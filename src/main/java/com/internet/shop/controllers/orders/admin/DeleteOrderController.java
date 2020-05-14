@@ -17,7 +17,7 @@ public class DeleteOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String orderID = req.getParameter("orderID");
-        Long userID = orderService.get(Long.valueOf(orderID)).getUser().getId();
+        Long userID = orderService.get(Long.valueOf(orderID)).getUserId();
         orderService.delete(Long.valueOf(orderID));
         resp.sendRedirect(req.getContextPath() + "/orders/admin/userOrders?userID=" + userID);
     }

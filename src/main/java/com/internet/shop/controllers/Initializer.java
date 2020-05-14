@@ -15,13 +15,7 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        var admin = new User("admin", "admin", "admin");
-        admin.setRoles(Set.of(Role.of("ADMIN")));
-        userService.create(admin);
 
-        var userTest = new User("1", "1", "1");
-        userTest.setRoles(Set.of(Role.of("USER")));
-        userService.create(userTest);
     }
 
     @Override

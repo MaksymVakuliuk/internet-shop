@@ -25,9 +25,8 @@ public class CreateOrderController extends HttpServlet {
             throws ServletException, IOException {
         Long userID = (Long) req.getSession().getAttribute("userID");
         ShoppingCart shoppingCart = shoppingCartService.getByUserId(userID);
-        User user = shoppingCart.getUser();
         List<Product> products = shoppingCart.getProducts();
-        orderService.completeOrder(products, user);
+        orderService.completeOrder(products, userID);
         shoppingCartService.clear(shoppingCart);
         resp.sendRedirect(req.getContextPath() + "/products/all");
     }
