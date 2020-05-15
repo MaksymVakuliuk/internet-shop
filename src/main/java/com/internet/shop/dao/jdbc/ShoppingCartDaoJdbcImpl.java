@@ -108,8 +108,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     }
 
     private void deleteShoppingCartProducts(Long cartId) throws SQLException {
-        String query =
-                "DELETE FROM shopping_carts_products WHERE cart_id = ?;";
+        String query = "DELETE FROM shopping_carts_products WHERE cart_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             var preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, cartId);

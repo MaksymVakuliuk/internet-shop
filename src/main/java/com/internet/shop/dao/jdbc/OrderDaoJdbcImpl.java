@@ -110,8 +110,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     }
 
     private void deleteShoppingCartProducts(Long orderId) throws SQLException {
-        String query =
-                "DELETE FROM orders_products WHERE order_id = ?;";
+        String query = "DELETE FROM orders_products WHERE order_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             var preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, orderId);
