@@ -3,6 +3,7 @@ package com.internet.shop.dao.jdbc;
 import com.internet.shop.dao.OrderDao;
 import com.internet.shop.dao.ProductDao;
 import com.internet.shop.lib.Dao;
+import com.internet.shop.lib.Inject;
 import com.internet.shop.model.Order;
 import com.internet.shop.model.Product;
 import com.internet.shop.util.ConnectionUtil;
@@ -16,6 +17,9 @@ import java.util.Optional;
 
 @Dao
 public class OrderDaoJdbcImpl implements OrderDao {
+    @Inject
+    private ProductDao productDao;
+
     @Override
     public Order create(Order order) {
         String query = "INSERT INTO orders (user_id) VALUES (?);";
@@ -138,7 +142,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Product> products = new ArrayList<>();
             while (resultSet.next()) {
-                ProductDao productDao = new ProductDaoJdbcImpl();
                 var product = productDao.get(resultSet.getLong("product_id")).get();
                 products.add(product);
             }

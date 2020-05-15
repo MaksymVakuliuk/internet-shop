@@ -3,6 +3,7 @@ package com.internet.shop.dao.jdbc;
 import com.internet.shop.dao.ProductDao;
 import com.internet.shop.dao.ShoppingCartDao;
 import com.internet.shop.lib.Dao;
+import com.internet.shop.lib.Inject;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.util.ConnectionUtil;
@@ -16,6 +17,8 @@ import java.util.Optional;
 
 @Dao
 public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
+    @Inject
+    private ProductDao productDao;
 
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
@@ -136,7 +139,6 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             ResultSet resultSet = getProductsOfCartStatement.executeQuery();
             List<Product> products = new ArrayList<>();
             while (resultSet.next()) {
-                ProductDao productDao = new ProductDaoJdbcImpl();
                 var product = productDao.get(resultSet.getLong("product_id")).get();
                 products.add(product);
             }
