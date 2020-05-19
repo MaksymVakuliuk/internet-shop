@@ -29,11 +29,11 @@
                 </td>
                 <td>
                     <a href="${pageContext.request.contextPath}
-                        /orders/admin/userOrders?userID=${user.id}">show orders</a>
+                        /orders/admin/userOrders?userId=${user.id}">show orders</a>
                 </td>
                 <td>
                     <a href="${pageContext.request.contextPath}
-                        /users/admin/deleteUser?userID=${user.id}">Delete</a>
+                        /users/admin/deleteUser?userId=${user.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

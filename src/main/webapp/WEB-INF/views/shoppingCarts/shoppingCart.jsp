@@ -8,7 +8,7 @@
     <%@include file="../headers/header.jsp"%>
     <h1>Shopping Cart</h1>
     <div>
-        User name: <c:out value="${shoppingCart.getUser().getName()}"/><br>
+        User name: <c:out value="${userName}"/><br>
     </div>
     <br>
     <table border="1">
@@ -31,7 +31,7 @@
                 </td>
                 <td>
                     <a href="${pageContext.request.contextPath}
-                        /shoppingCarts/removeProduct?productID=${product.id}">delete</a>
+                        /shoppingCarts/removeProduct?productId=${product.id}">delete</a>
                 </td>
             </tr>
         </c:forEach>

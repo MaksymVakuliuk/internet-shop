@@ -21,8 +21,8 @@ public class OrderServiceImpl implements OrderService {
     private ShoppingCartService shoppingCartService;
 
     @Override
-    public Order completeOrder(List<Product> products, User user) {
-        var order = orderDao.create(new Order(user, List.copyOf(products)));
+    public Order completeOrder(List<Product> products, Long userId) {
+        var order = orderDao.create(new Order(userId, List.copyOf(products)));
         return order;
     }
 
@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getUserOrders(User user) {
         return orderDao.getAll()
                 .stream()
-                .filter(order -> order.getUser().equals(user))
+                .filter(order -> order.getUserId().equals(user.getId()))
                 .collect(Collectors.toList());
     }
 

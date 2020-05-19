@@ -16,16 +16,16 @@ import java.util.Optional;
 public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public Product create(Product product) {
-        String query = "INSERT INTO products (name, price) VALUES (? , ?)";
+        String query = "INSERT INTO products (name, price) VALUES (? , ?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement =
+            var preparedStatement =
                     connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, product.getName());
             preparedStatement.setDouble(2, product.getPrice());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                product.setId(resultSet.getLong("product_id"));
+                product.setId(resultSet.getLong(1));
             }
             return product;
         } catch (SQLException e) {
@@ -35,9 +35,9 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public Optional<Product> get(Long id) {
-        String query = "SELECT * FROM products WHERE product_id = ?";
+        String query = "SELECT * FROM products WHERE product_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            var preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -53,10 +53,10 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public List<Product> getAll() {
         String query = "SELECT * FROM products";
-        List<Product> products = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            var preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
+            List<Product> products = new ArrayList<>();
             while (resultSet.next()) {
                 Product product = getProductFromResultSet(resultSet);
                 products.add(product);
@@ -71,7 +71,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
     public Product update(Product product) {
         String query = "UPDATE products SET NAME = ?, PRICE = ? WHERE product_id = ?";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            var preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, product.getName());
             preparedStatement.setDouble(2, product.getPrice());
             preparedStatement.setLong(2, product.getId());
@@ -88,23 +88,34 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "DELETE products WHERE product_id = ?";
-
+        String deleteProductFromProductsQuery = "DELETE FROM products WHERE product_id = ?;";
+        String deleteProductsFromOrdersQuery = "DELETE FROM orders_products WHERE product_id = ?;";
+        String deleteProductFromCartsQuery =
+                "DELETE FROM shopping_carts_products WHERE product_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, id);
-            return preparedStatement.executeUpdate() != 0;
+            var deleteProductFromCartsStatement =
+                    connection.prepareStatement(deleteProductFromCartsQuery);
+            deleteProductFromCartsStatement.setLong(1, id);
+            deleteProductFromCartsStatement.executeUpdate();
+            var deleteProductFromOrdersStatement =
+                    connection.prepareStatement(deleteProductsFromOrdersQuery);
+            deleteProductFromOrdersStatement.setLong(1, id);
+            deleteProductFromOrdersStatement.executeUpdate();
+            var deleteProductsFromProductsStatement =
+                    connection.prepareStatement(deleteProductFromProductsQuery);
+            deleteProductsFromProductsStatement.setLong(1, id);
+            return deleteProductsFromProductsStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to delete product with ID =" + id, e);
+            throw new RuntimeException("Unable to delete product with ID = " + id, e);
         }
     }
 
     private Product getProductFromResultSet(ResultSet resultSet) throws SQLException {
-        Long productID = resultSet.getLong("product_id");
+        Long productId = resultSet.getLong("product_id");
         String name = resultSet.getString("name");
         Double price = resultSet.getDouble("price");
-        Product product = new Product(name, price);
-        product.setId(productID);
+        var product = new Product(name, price);
+        product.setId(productId);
         return product;
     }
 }

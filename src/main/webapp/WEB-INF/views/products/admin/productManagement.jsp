@@ -43,7 +43,7 @@
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}
-                        /products/admin/delete?productID=${product.id}">delete</a>
+                        /products/admin/delete?productId=${product.id}">delete</a>
                     </td>
                 </tr>
             </c:forEach>

@@ -33,7 +33,7 @@ public class AuthenticationController extends HttpServlet {
         try {
             User user = authenticationService.login(login, password);
             HttpSession session = req.getSession();
-            session.setAttribute("userID", user.getId());
+            session.setAttribute("userId", user.getId());
         } catch (AuthenticationException e) {
             LOGGER.warn(e.getMessage());
             req.setAttribute("errorMessage", e.getMessage());

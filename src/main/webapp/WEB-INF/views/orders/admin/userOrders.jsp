@@ -23,15 +23,15 @@
                         <c:out value="${order.id}"/>
                     </td>
                     <td>
-                        <c:out value="${order.user.name}"/>
+                        <c:out value="${user.name}"/>
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}
-                            /orders/orderInformation?orderID=${order.id}">Show</a>
+                            /orders/orderInformation?orderId=${order.id}">Show</a>
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}
-                            /orders/admin/delete?orderID=${order.id}">delete</a>
+                            /orders/admin/delete?orderId=${order.id}">delete</a>
                     </td>
                 </tr>
             </c:forEach>

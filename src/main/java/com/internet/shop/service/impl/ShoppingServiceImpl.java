@@ -1,7 +1,6 @@
 package com.internet.shop.service.impl;
 
 import com.internet.shop.dao.ShoppingCartDao;
-import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Inject;
 import com.internet.shop.lib.Service;
 import com.internet.shop.model.Product;
@@ -25,8 +24,7 @@ public class ShoppingServiceImpl implements ShoppingCartService {
 
     @Override
     public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
-        if (shoppingCart.getProducts()
-                .remove(product)) {
+        if (shoppingCart.getProducts().remove(product)) {
             shoppingCartDao.update(shoppingCart);
             return true;
         }
@@ -43,14 +41,19 @@ public class ShoppingServiceImpl implements ShoppingCartService {
     public ShoppingCart getByUserId(Long userId) {
         return shoppingCartDao.getAll()
                 .stream()
-                .filter(shoppingCart -> shoppingCart.getUser().getId().equals(userId))
+                .filter(shoppingCart -> shoppingCart.getUserId().equals(userId))
                 .findFirst()
-                .orElse(Storage.addShoppingCart(new ShoppingCart(userService.get(userId))));
+                .orElseGet(() -> shoppingCartDao.create(new ShoppingCart(userId)));
     }
 
     @Override
     public List<Product> getAllProducts(ShoppingCart shoppingCart) {
         return shoppingCart.getProducts();
     }
-    
+
+    @Override
+    public void delete(Long id) {
+        shoppingCartDao.delete(id);
+    }
+
 }

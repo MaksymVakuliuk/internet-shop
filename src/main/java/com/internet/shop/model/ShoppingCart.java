@@ -5,11 +5,11 @@ import java.util.List;
 
 public class ShoppingCart {
     private Long id;
-    private User user;
+    private Long userId;
     private List<Product> products = new ArrayList<>();
 
-    public ShoppingCart(User user) {
-        this.user = user;
+    public ShoppingCart(Long userId) {
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -20,19 +20,23 @@ public class ShoppingCart {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
     public List<Product> getProducts() {
         return products;
     }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
     @Override
     public String toString() {
         return "ShoppingCart{"
                 + "id=" + id
-                + ", user=" + user
+                + ", user=" + userId
                 + ", products=" + products.stream().map(Product::toString) + '}';
     }
 }
