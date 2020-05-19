@@ -76,7 +76,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public Order update(Order order) {
         try {
-            deleteShoppingCartProducts(order.getId());
+            deleteOrderProducts(order.getId());
             insertOrderCartProducts(order);
             return order;
         } catch (SQLException e) {
@@ -89,7 +89,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     public boolean delete(Long id) {
         String query = "DELETE FROM orders WHERE order_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            deleteShoppingCartProducts(id);
+            deleteOrderProducts(id);
             var preparedStatement
                     = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
@@ -113,7 +113,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     }
 
-    private void deleteShoppingCartProducts(Long orderId) throws SQLException {
+    private void deleteOrderProducts(Long orderId) throws SQLException {
         String query = "DELETE FROM orders_products WHERE order_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             var preparedStatement = connection.prepareStatement(query);

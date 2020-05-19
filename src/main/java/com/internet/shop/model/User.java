@@ -6,6 +6,7 @@ public class User {
     private Long id;
     private String name;
     private String login;
+    private byte[] salt;
     private String password;
     private Set<Role> roles;
 
@@ -31,8 +32,20 @@ public class User {
         return login;
     }
 
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Set<Role> getRoles() {
