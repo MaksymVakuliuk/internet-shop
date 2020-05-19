@@ -1,11 +1,9 @@
 package com.internet.shop.util;
 
-import org.apache.log4j.Logger;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Arrays;
+import org.apache.log4j.Logger;
 
 public class HashUtil {
     private static Logger logger = Logger.getLogger(HashUtil.class);
@@ -33,7 +31,7 @@ public class HashUtil {
         return hashPassword.toString();
     }
 
-    public static boolean isValidPassword(String hashPassword ,String password, byte[] salt) {
+    public static boolean isValidPassword(String hashPassword, String password, byte[] salt) {
         return hashPassword(password, salt).equals(hashPassword);
     }
 }
