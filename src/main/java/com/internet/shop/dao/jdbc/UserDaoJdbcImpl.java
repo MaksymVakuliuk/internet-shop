@@ -162,4 +162,21 @@ public class UserDaoJdbcImpl implements UserDao {
             preparedStatement.executeUpdate();
         }
     }
+
+    @Override
+    public Optional<User> findByLogin(String login) {
+        String query = "SELECT * FROM users WHERE login  = ?";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            var preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                var user = getUserFromResultSet(resultSet);
+                return Optional.of(user);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Cant't retrieve user by login", e);
+        }
+        return Optional.empty();
+    }
 }

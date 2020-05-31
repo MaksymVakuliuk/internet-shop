@@ -13,7 +13,7 @@
         <table border="1">
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>User's login</th>
                 <th>Order information</th>
                 <th>Delete</th>
             </tr>
@@ -23,7 +23,7 @@
                         <c:out value="${order.id}"/>
                     </td>
                     <td>
-                        <c:out value="${user.name}"/>
+                        <c:out value="${userLogin}"/>
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}

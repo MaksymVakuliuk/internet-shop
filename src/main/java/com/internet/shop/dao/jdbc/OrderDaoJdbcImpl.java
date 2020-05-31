@@ -6,6 +6,7 @@ import com.internet.shop.lib.Dao;
 import com.internet.shop.lib.Inject;
 import com.internet.shop.model.Order;
 import com.internet.shop.model.Product;
+import com.internet.shop.model.User;
 import com.internet.shop.util.ConnectionUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -146,6 +147,24 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 products.add(product);
             }
             return products;
+        }
+    }
+
+    @Override
+    public List<Order> getUserOrders(User user) {
+        String query = "SELECT * FROM orders WHERE user_id = ?;";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            var preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, user.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Order> orders = new ArrayList<>();
+            while (resultSet.next()) {
+                var order = getOrderFromResultSet(resultSet);
+                orders.add(order);
+            }
+            return orders;
+        } catch (SQLException e) {
+            throw new RuntimeException("Unable to get orders of user : ", e);
         }
     }
 }
