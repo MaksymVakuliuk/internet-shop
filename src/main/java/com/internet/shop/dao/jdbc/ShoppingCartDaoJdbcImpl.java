@@ -155,9 +155,8 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return getShoppingCartFromResultSet(resultSet);
-            } else {
-                return null;
             }
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException("Unable to get shopping cart with userId = " + userId, e);
         }
