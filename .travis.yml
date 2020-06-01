@@ -1,14 +1,15 @@
 language: java
 jdk:
   - openjdk11
+script:
+  #- mvn clean install
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=MaksymVakuliuk_internet-shop
 addons:
   sonarcloud:
     organization: "maksymvakuliuk"
     token:
-      secure: "a7f452c6a77db60d57e86ad9db0b50fae64c5793" # encrypted value of your token
-script:
-  #- mvn clean install
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=MaksymVakuliuk_internet-shop
+      secure: "irzKxupEem0KfMwdlQyyLy6On35fq0Tw3pWTjDSWQc9wvZvZJ/Cj4N/RCj4xYe8x4868CUbHcU2N2Gl33nk0h/zW38RwQhYQVgmMIJv677HmV5644/4uDuMlYBFcWZf98jtgA3N1nuRaKSZUx9fOlfG2L81KfPCIlMLeaFg16zdZreostWYTGI+ArlGviHKnjeuYSmOE/wWGDqMef8qO/kOGfL+fy7NXxncZwHI+B6UKzwHxcLWD8uudku8FuauqNKFCN1pr9+2Y9z/x3GcPbPoLXe0OBjb5Hi4Fp8c7sGqkjQEf5cKWtUICQEA7NohsqimMSkxBr/zLd5lfRfqqeUid5NaRoYzG70HZZn7DwlhyCpzG1okAlfDZgF3pZY1CoYDYdD9C36uGixgS95yJPEft/QfydpjyNM47XHHerm53fBzWb+HFeGDE3LPRV+50KekxPQoQJMQp6NIpe+t1190pUJrllo5jYkk02ArCKFc79/z0oFnoxUsjNRbdcthJ/YNveycdQ1Nsm8L+fz9OPJsTZri1saNUzxYrKGqeSe+kRvoAMEOx+qqg4Ly1i3EzUqvhXLinwTh9C9aI9O08EPaVME4rjuq7BhOVIi+1QkDTkz02y+3w2rRFzFa7Xtl6OwetUyxHl61LQM5+NzlXPf/KFksJGmah7kN6UNnjOng="
+
 cache:
   directories:
     - $HOME/.m2
