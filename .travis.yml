@@ -1,8 +1,14 @@
 language: java
 jdk:
   - openjdk11
+addons:
+  sonarcloud:
+    organization: "maksymvakuliuk"
+    token:
+      secure: "a7f452c6a77db60d57e86ad9db0b50fae64c5793" # encrypted value of your token
 script:
-  - mvn clean install
+  #- mvn clean install
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=MaksymVakuliuk_internet-shop
 cache:
   directories:
     - $HOME/.m2
