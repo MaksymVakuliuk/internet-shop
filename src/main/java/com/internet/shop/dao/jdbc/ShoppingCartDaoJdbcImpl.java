@@ -2,13 +2,13 @@ package com.internet.shop.dao.jdbc;
 
 import com.internet.shop.dao.ProductDao;
 import com.internet.shop.dao.ShoppingCartDao;
+import com.internet.shop.exceptions.DataProcessingException;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.lib.Inject;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.util.ConnectionUtil;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,19 +22,11 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
-        String query = "INSERT INTO shopping_carts (user_id) VALUES (?);";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement =
-                    connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setLong(1, shoppingCart.getUserId());
-            preparedStatement.executeUpdate();
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                shoppingCart.setId(resultSet.getLong(1));
-            }
+        try {
+            insertShoppingCartProducts(shoppingCart);
             return shoppingCart;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to create shopping cart: ", e);
+            throw new DataProcessingException("Unable to create shopping cart: ", e);
         }
     }
 
@@ -50,7 +42,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 return Optional.of(shoppingCart);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to get shopping cart with ID = " + id, e);
+            throw new DataProcessingException("Unable to get shopping cart with ID = " + id, e);
         }
         return Optional.empty();
     }
@@ -68,7 +60,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             }
             return shoppingCarts;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to get all shopping carts : ", e);
+            throw new DataProcessingException("Unable to get all shopping carts : ", e);
         }
     }
 
@@ -79,7 +71,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             insertShoppingCartProducts(shoppingCart);
             return shoppingCart;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to update shopping cart  = "
+            throw new DataProcessingException("Unable to update shopping cart  = "
                     + shoppingCart.toString() + ": ", e);
         }
     }
@@ -93,7 +85,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to delete shopping cart with id = " + id + ": ", e);
+            throw new DataProcessingException("Unable to delete shopping cart with id = " + id + ": ", e);
         }
     }
 
@@ -158,7 +150,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             }
             return null;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to get shopping cart with userId = " + userId, e);
+            throw new DataProcessingException("Unable to get shopping cart with userId = " + userId, e);
         }
     }
 }

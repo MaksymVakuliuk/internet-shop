@@ -8,7 +8,15 @@ addons:
   sonarcloud:
     organization: "maksymvakuliuk"
     token:
-      secure: "J4JLwskvYQnlzfyCNlbpgqpmDr9T+IDsvFNgnk1gEl20BCXKkK+BIjM6nsftECpUIhjxc8tnzC528mOAIVVNlRZsOuC7vmJYT6F60cb00C7EAZcQ9erSIXvL/UTk6py9pfMLlQ2nD3JbgJ9rsw5a01PCIeURH9VFiiWhrPuuNGxnxE4ilIFB7KgFau+yxMM0PaqCkYpHp0aOB4eTlnKTHhG5NgVcF6iLfCaD1A9D7HgcGOZGQ7ZB0LF97Qfou1BuFlBC6MdLpOaZ1nYGENfrke+giED/w11GD1Ez6dRyErOdF645GCcpu+CEsQzi4BEHwl5cMkeT1+OOLjrWCWplKEEMhxilp+Jd/x+54U/bsptukTQniFaPpVGcSgVlYVm6DU9O/GP6yxK6KAJpo++Gn9K0sXHP86Hk98zCJY8ypvdlbiIkmMbSqRcOXcv/JrwyRaOaAe9dqfCa3TRIcsvOCcLTGm/TYTwzSWnTNppwYou9hwudUsWWxNUeoqZ/7/1y5iBAj3rYX64YdHw8HvaOBnULYt1R7x8a8m52ey4hWL2gDDFMJhukxWBUlITMR+Td02p51i2oMBj9RjdTIoBETcb00akDBuESC0WFErIp820tvAd9IwcfqTy64v98MrLYjnUid9OcTdN0QgHOyUlBDvpax4Um0Vunc9zjobYen7A="
+      secure: "J4JLwskvYQnlzfyCNlbpgqpmDr9T+IDsvFNgnk1gEl20BCXKkK+BIjM6nsftECpUIhjxc8tnzC528mOAIVV
+              NlRZsOuC7vmJYT6F60cb00C7EAZcQ9erSIXvL/UTk6py9pfMLlQ2nD3JbgJ9rsw5a01PCIeURH9VFiiWhrPu
+              uNGxnxE4ilIFB7KgFau+yxMM0PaqCkYpHp0aOB4eTlnKTHhG5NgVcF6iLfCaD1A9D7HgcGOZGQ7ZB0LF97Qf
+              ou1BuFlBC6MdLpOaZ1nYGENfrke+giED/w11GD1Ez6dRyErOdF645GCcpu+CEsQzi4BEHwl5cMkeT1+OOLjr
+              WCWplKEEMhxilp+Jd/x+54U/bsptukTQniFaPpVGcSgVlYVm6DU9O/GP6yxK6KAJpo++Gn9K0sXHP86Hk98z
+              CJY8ypvdlbiIkmMbSqRcOXcv/JrwyRaOaAe9dqfCa3TRIcsvOCcLTGm/TYTwzSWnTNppwYou9hwudUsWWxNU
+              eoqZ/7/1y5iBAj3rYX64YdHw8HvaOBnULYt1R7x8a8m52ey4hWL2gDDFMJhukxWBUlITMR+Td02p51i2oMBj
+              9RjdTIoBETcb00akDBuESC0WFErIp820tvAd9IwcfqTy64v98MrLYjnUid9OcTdN0QgHOyUlBDvpax4Um0Vu
+              nc9zjobYen7A="
 
 cache:
   directories:

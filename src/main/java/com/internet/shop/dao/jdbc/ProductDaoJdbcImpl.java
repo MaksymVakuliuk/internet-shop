@@ -1,6 +1,7 @@
 package com.internet.shop.dao.jdbc;
 
 import com.internet.shop.dao.ProductDao;
+import com.internet.shop.exceptions.DataProcessingException;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Product;
 import com.internet.shop.util.ConnectionUtil;
@@ -29,7 +30,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return product;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to create product: " + product, e);
+            throw new DataProcessingException("Unable to create product: " + product, e);
         }
     }
 
@@ -45,7 +46,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
                 return Optional.of(product);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to get product with ID = " + id, e);
+            throw new DataProcessingException("Unable to get product with ID = " + id, e);
         }
         return Optional.empty();
     }
@@ -63,7 +64,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return products;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable get all products: ", e);
+            throw new DataProcessingException("Unable get all products: ", e);
         }
     }
 
@@ -82,7 +83,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return product;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to update product: " + product, e);
+            throw new DataProcessingException("Unable to update product: " + product, e);
         }
     }
 
@@ -106,7 +107,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             deleteProductsFromProductsStatement.setLong(1, id);
             return deleteProductsFromProductsStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to delete product with ID = " + id, e);
+            throw new DataProcessingException("Unable to delete product with ID = " + id, e);
         }
     }
 

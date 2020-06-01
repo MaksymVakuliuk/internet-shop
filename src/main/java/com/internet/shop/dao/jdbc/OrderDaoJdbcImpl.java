@@ -2,6 +2,7 @@ package com.internet.shop.dao.jdbc;
 
 import com.internet.shop.dao.OrderDao;
 import com.internet.shop.dao.ProductDao;
+import com.internet.shop.exceptions.DataProcessingException;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.lib.Inject;
 import com.internet.shop.model.Order;
@@ -36,7 +37,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             insertOrderCartProducts(order);
             return order;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to create order: ", e);
+            throw new DataProcessingException("Unable to create order: ", e);
         }
     }
 
@@ -52,7 +53,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 return Optional.of(order);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to get order with ID = " + id, e);
+            throw new DataProcessingException("Unable to get order with ID = " + id, e);
         }
         return Optional.empty();
     }
@@ -70,7 +71,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             }
             return orders;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to get all orders carts : ", e);
+            throw new DataProcessingException("Unable to get all orders carts : ", e);
         }
     }
 
@@ -81,7 +82,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             insertOrderCartProducts(order);
             return order;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to update order cart  = "
+            throw new DataProcessingException("Unable to update order cart  = "
                     + order.toString() + ": ", e);
         }
     }
@@ -96,7 +97,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to delete order with id = " + id + ": ", e);
+            throw new DataProcessingException("Unable to delete order with id = " + id + ": ", e);
         }
     }
 
@@ -164,7 +165,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             }
             return orders;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to get orders of user : ", e);
+            throw new DataProcessingException("Unable to get orders of user : ", e);
         }
     }
 }

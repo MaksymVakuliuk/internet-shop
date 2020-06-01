@@ -1,6 +1,7 @@
 package com.internet.shop.dao.jdbc;
 
 import com.internet.shop.dao.UserDao;
+import com.internet.shop.exceptions.DataProcessingException;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Role;
 import com.internet.shop.model.User;
@@ -36,7 +37,7 @@ public class UserDaoJdbcImpl implements UserDao {
             setRolesToUser(user);
             return user;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to create user: ", e);
+            throw new DataProcessingException("Unable to create user: ", e);
         }
     }
 
@@ -52,7 +53,7 @@ public class UserDaoJdbcImpl implements UserDao {
                 return Optional.of(user);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to get user with ID = " + id, e);
+            throw new DataProcessingException("Unable to get user with ID = " + id, e);
         }
         return Optional.empty();
     }
@@ -70,7 +71,7 @@ public class UserDaoJdbcImpl implements UserDao {
             }
             return users;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to get all users ", e);
+            throw new DataProcessingException("Unable to get all users ", e);
         }
     }
 
@@ -88,7 +89,7 @@ public class UserDaoJdbcImpl implements UserDao {
             setRolesToUser(user);
             return user;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to update user  = " + user.toString() + ": ", e);
+            throw new DataProcessingException("Unable to update user  = " + user.toString() + ": ", e);
         }
     }
 
@@ -101,7 +102,7 @@ public class UserDaoJdbcImpl implements UserDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to delete user with id = " + id + ": ", e);
+            throw new DataProcessingException("Unable to delete user with id = " + id + ": ", e);
         }
     }
 
@@ -175,7 +176,7 @@ public class UserDaoJdbcImpl implements UserDao {
                 return Optional.of(user);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Cant't retrieve user by login", e);
+            throw new DataProcessingException("Cant't retrieve user by login", e);
         }
         return Optional.empty();
     }

@@ -3,10 +3,11 @@ package com.internet.shop.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class HashUtil {
-    private static Logger logger = Logger.getLogger(HashUtil.class);
+    private static Logger logger = LogManager.getLogger(HashUtil.class);
 
     public static byte[] getSalt() {
         SecureRandom random = new SecureRandom();
