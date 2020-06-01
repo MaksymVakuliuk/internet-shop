@@ -85,7 +85,9 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Unable to delete shopping cart with id = " + id + ": ", e);
+            throw new DataProcessingException(
+                    "Unable to delete shopping cart with id = " + id + ": ",
+                    e);
         }
     }
 
@@ -150,7 +152,8 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             }
             return null;
         } catch (SQLException e) {
-            throw new DataProcessingException("Unable to get shopping cart with userId = " + userId, e);
+            throw new DataProcessingException(
+                    "Unable to get shopping cart with userId = " + userId, e);
         }
     }
 }

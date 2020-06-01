@@ -8,16 +8,7 @@ addons:
   sonarcloud:
     organization: "maksymvakuliuk"
     token:
-      secure: "J4JLwskvYQnlzfyCNlbpgqpmDr9T+IDsvFNgnk1gEl20BCXKkK+BIjM6nsftECpUIhjxc8tnzC528mOAIVV
-              NlRZsOuC7vmJYT6F60cb00C7EAZcQ9erSIXvL/UTk6py9pfMLlQ2nD3JbgJ9rsw5a01PCIeURH9VFiiWhrPu
-              uNGxnxE4ilIFB7KgFau+yxMM0PaqCkYpHp0aOB4eTlnKTHhG5NgVcF6iLfCaD1A9D7HgcGOZGQ7ZB0LF97Qf
-              ou1BuFlBC6MdLpOaZ1nYGENfrke+giED/w11GD1Ez6dRyErOdF645GCcpu+CEsQzi4BEHwl5cMkeT1+OOLjr
-              WCWplKEEMhxilp+Jd/x+54U/bsptukTQniFaPpVGcSgVlYVm6DU9O/GP6yxK6KAJpo++Gn9K0sXHP86Hk98z
-              CJY8ypvdlbiIkmMbSqRcOXcv/JrwyRaOaAe9dqfCa3TRIcsvOCcLTGm/TYTwzSWnTNppwYou9hwudUsWWxNU
-              eoqZ/7/1y5iBAj3rYX64YdHw8HvaOBnULYt1R7x8a8m52ey4hWL2gDDFMJhukxWBUlITMR+Td02p51i2oMBj
-              9RjdTIoBETcb00akDBuESC0WFErIp820tvAd9IwcfqTy64v98MrLYjnUid9OcTdN0QgHOyUlBDvpax4Um0Vu
-              nc9zjobYen7A="
-
+      secure: "LUdJlnOdjvcwjCJJMys+tjbLueHkcRMMo2R0S2O4BBEoRCl6CCNR8UMNL8uF6Cy0F9MFIEgP4MZfpqfU/0zW6JZRuZ+enTG7WPkNAgzsy7Qj3J5fOheLW5tvvn9TJkdOz3WnwhziBwIjpyHmEtz6QlyQyh7xIQFe1qLd1W6+3h2cjeA8IzuY7kb6FEkCAwmQxZrzoriJbQ9R2OaWDWXQrcdIzCnKYd14AuN+dWQE8S+OtYxu//EcTwIn6pIfzfJ702u8etRFKKFdoGE+g+a0BBg4cnXsjTExxSqnSJgf0vA414Fv9zON7w+mhpSk+LEDSbw1OUUfHvw72vtWbM+0xSH8tlhAyrUoSF5UMB++CDU7u9C2eEk/y5R0c9rL3lNpmskkI07euK6xdDffdOK+o24sHExicwqy5jvHy6UPchK8FkCRLD0Eop/q5eb7Wgz4Dz4OHkbfbpjiuxe2AW35FjpeVGMAA3leSsushW/whPe6iYYDoDmuky30mqmLkFjUrWwA1tkQC/zsnCIsCE/jkiOTR8smspO2zQPya4sZ3HThlSca8dCJFowDPeODQsXkXmOPD0weyRKJLJsvLhFBnuPHlBUxLCk3SgvOuX4D722O38VPHv5o7a/ITdnu+6OkeC9bz3KnobzRLMX55ZCOLVLJjZ5zopm1z9NzWU8WnM8="
 cache:
   directories:
     - $HOME/.m2

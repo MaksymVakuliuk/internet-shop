@@ -89,7 +89,8 @@ public class UserDaoJdbcImpl implements UserDao {
             setRolesToUser(user);
             return user;
         } catch (SQLException e) {
-            throw new DataProcessingException("Unable to update user  = " + user.toString() + ": ", e);
+            throw new DataProcessingException(
+                    "Unable to update user  = " + user.toString() + ": ", e);
         }
     }
 
