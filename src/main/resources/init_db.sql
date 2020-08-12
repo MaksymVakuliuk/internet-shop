@@ -4,7 +4,7 @@ CREATE TABLE `internet-shop`.`products` (
   `product_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(256) NOT NULL,
   `price` DOUBLE NOT NULL,
-  PRIMARY KEY (`products_id`));
+  PRIMARY KEY (`product_id`));
 
 CREATE TABLE `internet-shop`.`users` (
   `user_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
@@ -14,7 +14,6 @@ CREATE TABLE `internet-shop`.`users` (
   `salt` VARBINARY(16) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE);
-
 
 CREATE TABLE `internet-shop`.`roles` (
   `role_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
