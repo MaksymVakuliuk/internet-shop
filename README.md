@@ -1,1 +1,4 @@
-# internet-shop
+# Internet shop
+
+# Authors
+Maksym Vakuliuk

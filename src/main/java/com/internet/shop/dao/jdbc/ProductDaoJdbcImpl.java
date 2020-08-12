@@ -1,12 +1,13 @@
 package com.internet.shop.dao.jdbc;
 
+import static java.sql.Statement.RETURN_GENERATED_KEYS;
+
 import com.internet.shop.dao.ProductDao;
 import com.internet.shop.exceptions.DataProcessingException;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Product;
 import com.internet.shop.util.ConnectionUtil;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public Product create(Product product) {
         String query = "INSERT INTO products (name, price) VALUES (? , ?);";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement =
-                    connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement =
+                        connection.prepareStatement(query, RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, product.getName());
             preparedStatement.setDouble(2, product.getPrice());
             preparedStatement.executeUpdate();
@@ -37,8 +38,8 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public Optional<Product> get(Long id) {
         String query = "SELECT * FROM products WHERE product_id = ?;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -54,8 +55,8 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public List<Product> getAll() {
         String query = "SELECT * FROM products";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Product> products = new ArrayList<>();
             while (resultSet.next()) {
@@ -71,8 +72,8 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public Product update(Product product) {
         String query = "UPDATE products SET NAME = ?, PRICE = ? WHERE product_id = ?";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, product.getName());
             preparedStatement.setDouble(2, product.getPrice());
             preparedStatement.setLong(2, product.getId());
@@ -93,9 +94,9 @@ public class ProductDaoJdbcImpl implements ProductDao {
         String deleteProductsFromOrdersQuery = "DELETE FROM orders_products WHERE product_id = ?;";
         String deleteProductFromCartsQuery =
                 "DELETE FROM shopping_carts_products WHERE product_id = ?;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var deleteProductFromCartsStatement =
-                    connection.prepareStatement(deleteProductFromCartsQuery);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var deleteProductFromCartsStatement =
+                        connection.prepareStatement(deleteProductFromCartsQuery);) {
             deleteProductFromCartsStatement.setLong(1, id);
             deleteProductFromCartsStatement.executeUpdate();
             var deleteProductFromOrdersStatement =

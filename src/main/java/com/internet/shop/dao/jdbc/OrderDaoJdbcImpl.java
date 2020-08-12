@@ -1,5 +1,7 @@
 package com.internet.shop.dao.jdbc;
 
+import static java.sql.Statement.RETURN_GENERATED_KEYS;
+
 import com.internet.shop.dao.OrderDao;
 import com.internet.shop.dao.ProductDao;
 import com.internet.shop.exceptions.DataProcessingException;
@@ -10,7 +12,6 @@ import com.internet.shop.model.Product;
 import com.internet.shop.model.User;
 import com.internet.shop.util.ConnectionUtil;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,9 +26,9 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public Order create(Order order) {
         String query = "INSERT INTO orders (user_id) VALUES (?);";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement =
-                    connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement =
+                        connection.prepareStatement(query, RETURN_GENERATED_KEYS)) {
             preparedStatement.setLong(1, order.getUserId());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -44,8 +45,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public Optional<Order> get(Long id) {
         String query = "SELECT * FROM orders WHERE order_id = ?;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -61,8 +62,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public List<Order> getAll() {
         String query = "SELECT * FROM orders;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Order> orders = new ArrayList<>();
             while (resultSet.next()) {
@@ -90,10 +91,9 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public boolean delete(Long id) {
         String query = "DELETE FROM orders WHERE order_id = ?;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement = connection.prepareStatement(query)) {
             deleteOrderProducts(id);
-            var preparedStatement
-                    = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
@@ -104,9 +104,9 @@ public class OrderDaoJdbcImpl implements OrderDao {
     private void insertOrderCartProducts(Order order) throws SQLException {
         String query =
                 "INSERT INTO orders_products (order_id, product_id) VALUES (?, ?);";
-        for (Product product : order.getProducts()) {
-            try (Connection connection = ConnectionUtil.getConnection()) {
-                var preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement = connection.prepareStatement(query)) {
+            for (Product product : order.getProducts()) {
                 preparedStatement.setLong(1, order.getId());
                 preparedStatement.setLong(2, product.getId());
                 preparedStatement.executeUpdate();
@@ -117,8 +117,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     private void deleteOrderProducts(Long orderId) throws SQLException {
         String query = "DELETE FROM orders_products WHERE order_id = ?;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, orderId);
             preparedStatement.executeUpdate();
         }
@@ -137,9 +137,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
         String query = "SELECT product_id FROM products "
                 + "JOIN orders_products USING(product_id) "
                 + "WHERE order_id = ?;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement =
-                    connection.prepareStatement(query);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, orderId);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Product> products = new ArrayList<>();
@@ -154,8 +153,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public List<Order> getUserOrders(User user) {
         String query = "SELECT * FROM orders WHERE user_id = ?;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, user.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Order> orders = new ArrayList<>();
@@ -165,7 +164,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             }
             return orders;
         } catch (SQLException e) {
-            throw new DataProcessingException("Unable to get orders of user : ", e);
+            throw new DataProcessingException("Unable to get orders of user: ", e);
         }
     }
 }
