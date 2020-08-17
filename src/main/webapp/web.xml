@@ -167,6 +167,15 @@
         <url-pattern>/orders/orderInformation</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>insert</servlet-name>
+        <servlet-class>com.internet.shop.controllers.InsertController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>insert</servlet-name>
+        <url-pattern>/insert</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>authenticationFilter</filter-name>
         <filter-class>com.internet.shop.web.filters.AuthenticationFilter</filter-class>
@@ -184,8 +193,4 @@
         <filter-name>authorizationFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <listener>
-        <listener-class>com.internet.shop.controllers.Initializer</listener-class>
-    </listener>
 </web-app>

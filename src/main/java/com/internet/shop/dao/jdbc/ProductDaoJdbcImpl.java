@@ -76,7 +76,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
                 var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, product.getName());
             preparedStatement.setDouble(2, product.getPrice());
-            preparedStatement.setLong(2, product.getId());
+            preparedStatement.setLong(3, product.getId());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {

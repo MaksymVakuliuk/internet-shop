@@ -6,6 +6,6 @@
 </head>
 <body>
     <%@ include file="./headers/header.jsp"%>
-    <h1>Hello world!</h1>
+    <h1>Welcome to our shop!</h1>
 </body>
 </html>
