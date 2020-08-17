@@ -1,5 +1,6 @@
 package com.internet.shop.util;
 
+import com.internet.shop.exceptions.ConnectionException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,7 +11,7 @@ public class ConnectionUtil {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Can't find MySQL Driver", e);
+            throw new ConnectionException("Can't find MySQL Driver", e);
         }
     }
 
@@ -23,7 +24,7 @@ public class ConnectionUtil {
         try {
             return DriverManager.getConnection(url, dbProperties);
         } catch (SQLException e) {
-            throw new RuntimeException("Can't establish the connection to DB", e);
+            throw new ConnectionException("Can't establish the connection to DB", e);
         }
 
     }

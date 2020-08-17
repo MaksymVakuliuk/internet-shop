@@ -143,7 +143,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Product> products = new ArrayList<>();
             while (resultSet.next()) {
-                var product = productDao.get(resultSet.getLong("product_id")).get();
+                var product = productDao.get(resultSet.getLong("product_id")).orElseThrow();
                 products.add(product);
             }
             return products;
