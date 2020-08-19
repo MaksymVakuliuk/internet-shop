@@ -9,6 +9,7 @@ import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.util.ConnectionUtil;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,8 +23,16 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
-        try {
-            insertShoppingCartProducts(shoppingCart);
+        String query = "INSERT INTO shopping_carts (user_id) VALUES (?);";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            var preparedStatement =
+                    connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            preparedStatement.setLong(1, shoppingCart.getUserId());
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                shoppingCart.setId(resultSet.getLong(1));
+            }
             return shoppingCart;
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to create shopping cart: ", e);
@@ -150,7 +159,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             if (resultSet.next()) {
                 return getShoppingCartFromResultSet(resultSet);
             }
-            return null;
+            return create(new ShoppingCart(userId));
         } catch (SQLException e) {
             throw new DataProcessingException(
                     "Unable to get shopping cart with userId = " + userId, e);
