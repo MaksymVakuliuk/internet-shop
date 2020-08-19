@@ -5,8 +5,8 @@ import com.internet.shop.model.Role;
 import com.internet.shop.model.User;
 import com.internet.shop.service.RoleService;
 import com.internet.shop.service.UserService;
-import com.internet.shop.util.HashUtil;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +21,21 @@ public class InsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        clear();
         insertRole();
         insertUsers();
         resp.sendRedirect(req.getContextPath() + "/");
+    }
+
+    private void clear() {
+        List<User> allUsers = userService.getAll();
+        for (User user : allUsers) {
+            userService.delete(user.getId());
+        }
+        List<Role> allRoles = roleService.getAll();
+        for (Role role : allRoles) {
+            roleService.delete(role.getId());
+        }
     }
 
     private void insertRole() {
@@ -34,17 +46,11 @@ public class InsertController extends HttpServlet {
     }
 
     private void insertUsers() {
-        byte[] salt = HashUtil.getSalt();
-        String pass = HashUtil.hashPassword("apass", salt);
-        User adminUser = new User("admin", "admin", pass);
-        adminUser.setSalt(salt);
+        User adminUser = new User("admin", "admin", "apass");
         Role roleName = new Role(Role.RoleName.ADMIN);
         adminUser.setRoles(Set.of(roleName));
         userService.create(adminUser);
-        salt = HashUtil.getSalt();
-        pass = HashUtil.hashPassword("pass", salt);
-        User user = new User("user", "user", pass);
-        user.setSalt(salt);
+        User user = new User("user", "user", "pass");
         Role userRole = new Role(Role.RoleName.USER);
         user.setRoles(Set.of(userRole));
         userService.create(user);

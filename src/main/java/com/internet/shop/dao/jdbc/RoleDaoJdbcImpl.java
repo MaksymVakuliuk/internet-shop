@@ -89,7 +89,7 @@ public class RoleDaoJdbcImpl implements RoleDao {
     @Override
     public boolean delete(Long id) {
         String deleteRoleFromRolesQuery = "DELETE FROM roles WHERE role_id = ?;";
-        String deleteRolesFromUsersQuery = "DELETE FROM sers_roles WHERE role_id = ?;";
+        String deleteRolesFromUsersQuery = "DELETE FROM users_roles WHERE role_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();) {
             var deleteProductFromOrdersStatement =
                     connection.prepareStatement(deleteRolesFromUsersQuery);
