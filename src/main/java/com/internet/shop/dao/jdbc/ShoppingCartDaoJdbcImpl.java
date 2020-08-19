@@ -1,5 +1,7 @@
 package com.internet.shop.dao.jdbc;
 
+import static java.sql.Statement.RETURN_GENERATED_KEYS;
+
 import com.internet.shop.dao.ProductDao;
 import com.internet.shop.dao.ShoppingCartDao;
 import com.internet.shop.exceptions.DataProcessingException;
@@ -9,7 +11,6 @@ import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.util.ConnectionUtil;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,9 +25,9 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
         String query = "INSERT INTO shopping_carts (user_id) VALUES (?);";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            var preparedStatement =
-                    connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+        try (Connection connection = ConnectionUtil.getConnection();
+                var preparedStatement =
+                         connection.prepareStatement(query, RETURN_GENERATED_KEYS)) {
             preparedStatement.setLong(1, shoppingCart.getUserId());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();

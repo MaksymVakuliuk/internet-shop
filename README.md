@@ -20,7 +20,7 @@
 ###Functions available for users with "USER" role:
    * add/delete products to shopping cart
    * complete orders
-   * view/delete own orders
+   * view own orders
 # <a name="description"></a> Project Structure
   * java 11
   * Maven 4.0.0
