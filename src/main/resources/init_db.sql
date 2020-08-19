@@ -48,6 +48,13 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
 --
+-- Insert roles to `roles` table
+--
+
+INSERT INTO `roles` (`role_name`) VALUES ('ADMIN');
+INSERT INTO `roles` (`role_name`) VALUES ('USER');
+
+--
 -- Table structure for table `shopping_carts`
 --
 

@@ -22,7 +22,6 @@ public class InsertController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         clear();
-        insertRole();
         insertUsers();
         resp.sendRedirect(req.getContextPath() + "/");
     }
@@ -32,17 +31,6 @@ public class InsertController extends HttpServlet {
         for (User user : allUsers) {
             userService.delete(user.getId());
         }
-        List<Role> allRoles = roleService.getAll();
-        for (Role role : allRoles) {
-            roleService.delete(role.getId());
-        }
-    }
-
-    private void insertRole() {
-        Role adminRole = new Role(Role.RoleName.ADMIN);
-        roleService.create(adminRole);
-        Role userRole = new Role(Role.RoleName.USER);
-        roleService.create(userRole);
     }
 
     private void insertUsers() {
