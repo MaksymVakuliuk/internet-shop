@@ -5,7 +5,7 @@
     <title>Oll orders</title>
 </head>
 <body>
-    <%@include file="../../headers/header.jsp"%>
+    <%@include file="../headers/header.jsp"%>
 
     <h1>All orders</h1>
 
@@ -13,7 +13,7 @@
         <table border="1">
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>User's login</th>
                 <th>Order information</th>
                 <th>Delete</th>
             </tr>
@@ -23,11 +23,11 @@
                         <c:out value="${order.id}"/>
                     </td>
                     <td>
-                        <c:out value="${user.name}"/>
+                        <c:out value="${userLogin}"/>
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}
-                            /orders/orderInformation?orderId=${order.id}">Show</a>
+                            /orders/orderInformation?orderId=${order.id}">show</a>
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}

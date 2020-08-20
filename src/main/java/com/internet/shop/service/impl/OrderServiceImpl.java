@@ -1,7 +1,6 @@
 package com.internet.shop.service.impl;
 
 import com.internet.shop.dao.OrderDao;
-import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Inject;
 import com.internet.shop.lib.Service;
 import com.internet.shop.model.Order;
@@ -10,8 +9,6 @@ import com.internet.shop.model.User;
 import com.internet.shop.service.OrderService;
 import com.internet.shop.service.ShoppingCartService;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -28,20 +25,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getUserOrders(User user) {
-        return orderDao.getAll()
-                .stream()
-                .filter(order -> order.getUserId().equals(user.getId()))
-                .collect(Collectors.toList());
+        return orderDao.getUserOrders(user);
     }
 
     @Override
     public Order create(Order order) {
-        return Storage.addOrder(order);
+        return orderDao.create(order);
     }
 
     @Override
     public Order get(Long id) {
-        return orderDao.get(id).get();
+        return orderDao.get(id).orElseThrow();
     }
 
     @Override
@@ -51,12 +45,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order update(Order order) {
-        IntStream.range(0, Storage.orders.size())
-                .filter(i -> Storage.orders.get(i)
-                        .getId()
-                        .equals(order.getId()))
-                .forEach(i -> Storage.orders.set(i, order));
-        return order;
+        return orderDao.update(order);
     }
 
     @Override

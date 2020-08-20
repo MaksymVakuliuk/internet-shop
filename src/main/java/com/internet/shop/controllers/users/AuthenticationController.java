@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AuthenticationController extends HttpServlet {
-    private static final Logger LOGGER = Logger.getLogger(AuthenticationController.class);
+    private static final Logger LOGGER = LogManager.getLogger(AuthenticationController.class);
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private static AuthenticationService authenticationService =
             (AuthenticationService) INJECTOR.getInstance(AuthenticationService.class);
