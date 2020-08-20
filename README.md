@@ -5,19 +5,19 @@
    * [Authors](#authors)
 # <a name="description"></a> Short Description 
    This Web project of simple internet shop.
-###Functions available for all users:
+### Functions available for all users:
    * view the main page
    * view list of products
    * log in
    * sign up
    * log out
-####unctions available for users with "ADMIN" role:
+#### Functions available for users with "ADMIN" role:
    * delete orders of users
    * view orders list and order information of all users
    * add/delete products to shop
    * view list of all users
    * delete users
-###Functions available for users with "USER" role:
+### Functions available for users with "USER" role:
    * add/delete products to shopping cart
    * complete orders
    * view own orders
